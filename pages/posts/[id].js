@@ -4,9 +4,9 @@ import Date from '../../components/date'
 import Layout from '../../components/templates/Layout'
 
 export default function Post({ postData }) {
-    console.log('postData post')
+
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
+        <div className="prose min-h-screen">
             <Head>
                 <title>{postData.title}</title>
             </Head>
@@ -26,7 +26,7 @@ export async function getStaticPaths() {
     // Return a list of possible value for id
 
     const paths = getAllPostIds()
-    console.log('paths paths', paths)
+
     return {
         paths,
         fallback: false
@@ -35,7 +35,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const postData = await getPostData(params.id)
-    console.log('postData props', postData)
+
     return {
         props: {
             postData

@@ -14,9 +14,7 @@ export default function Home({ allPostsData, metarsData }) {
       </Head>
 
       <main className="flex flex-col items-left justify-top w-full flex-1 text-left">
-        <div className="bg-black text-white text-right pr-2 antialiased mb-6">
-          <MetarsStrip MetarsData={Object.values(metarsData)[0]} />
-        </div>
+        <MetarsStrip MetarsData={Object.values(metarsData)[0]} />
 
         <h1 className="text-6xl font-bold">
           Hello.
