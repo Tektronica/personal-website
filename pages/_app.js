@@ -1,7 +1,21 @@
 import 'tailwindcss/tailwind.css'
+import '../styles/index.css'
+// import Layout from '../components/templates/Layout'
+// https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+export default function App({ Component, pageProps }) {
+  const Layout = Component.layout || (children => <>{children}</>)
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+    
+    )
 }
 
-export default MyApp
+// MyApp.getInitialProps = async (appContext) => {
+//   // calls page's `getInitialProps` and fills `appProps.pageProps`
+//   const appProps = await App.getInitialProps(appContext);
+
+//   return { ...appProps };
+// };
