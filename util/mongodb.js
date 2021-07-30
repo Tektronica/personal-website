@@ -19,16 +19,20 @@ if (!dbName) {
 }
 
 export async function connectToDatabase() {
+
   if (cachedClient && cachedDb) {
     return { client: cachedClient, db: cachedDb }
   }
 
-  const client = await MongoClient.connect(uri, {
+  const client = await MongoClient.connect(
+    uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
 
   const db = await client.db(dbName)
+  
+  console.log('beginning async')
 
   cachedClient = client
   cachedDb = db
