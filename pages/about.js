@@ -1,9 +1,9 @@
 import Head from 'next/head'
 import Layout from '../components/templates/Layout'
 import Image from 'next/image'
-import { connectToDatabase } from '../util/mongodb'
+import { connectToDatabase } from '../lib/mongodb'
 
-export default function Home({ isConnected }) {
+export default function About({ isConnected }) {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <Head>
@@ -42,12 +42,12 @@ export default function Home({ isConnected }) {
 
 export async function getServerSideProps(context) {
     const { client } = await connectToDatabase()
-    console.log(client)
-    const isConnected = await client.isConnected() // Returns true or false
+  
+    const isConnected = await client.isConnected()
   
     return {
       props: { isConnected },
     }
   }
 
-Home.layout = Layout
+About.layout = Layout
