@@ -3,7 +3,7 @@ import Layout from '../components/templates/Layout'
 import Image from 'next/image'
 import { connectToDatabase } from '../lib/mongodb'
 
-export default function About({ isConnected }) {
+export default function About({ movies }) {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <Head>
@@ -27,27 +27,43 @@ export default function About({ isConnected }) {
                     height={500}
                 />
 
-                {isConnected ? (
-                    <h2 className="subtitle">You are connected to MongoDB</h2>
-                ) : (
-                    <h2 className="subtitle">
-                        You are NOT connected to MongoDB. Check the <code>README.md</code>{' '}
-                        for instructions.
-                    </h2>
-                )}
+                <div>
+                    <h1>Top 20 Movies of All Time</h1>
+                    <p>
+                        <small>(According to Metacritic)</small>
+                    </p>
+                    <ul>
+                        {movies.map((movie) => (
+                            <li>
+                                <h2 className="pt-4 
+                                font-bold">{movie.title}</h2>
+                                <h3>metacritic: {movie.metacritic}</h3>
+                                <p>{movie.plot}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+
             </main>
         </div>
     )
 }
 
-export async function getServerSideProps(context) {
-    const { client } = await connectToDatabase()
-  
-    const isConnected = await client.isConnected()
-  
+export async function getServerSideProps() {
+    const { db } = await connectToDatabase();
+    const movies = await db
+        .collection("movies")
+        .find({})
+        .sort({ metacritic: -1 })
+        .limit(20)
+        .toArray();
+
     return {
-      props: { isConnected },
-    }
-  }
+        props: {
+            movies: JSON.parse(JSON.stringify(movies)),
+        },
+    };
+}
 
 About.layout = Layout
