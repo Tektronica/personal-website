@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import Layout from '../components/templates/Layout'
-import { getPhotos } from '../lib/photos'
-import GalleryCard from '../components/Cards/GalleryCard/GalleryCard'
+import { connectToDatabase } from '../lib/mongodb'
+import PreviewCard from '../components/Cards/GalleryCard/PreviewCard'
+import Album from './album/[album]'
 
-export default function Gallery({ photosDB }) {
-    console.log(photosDB)
+export default function GalleryPage({ albums }) {
+
     return (
         <div className="flex flex-col items-center justify-center min-h-screen py-2">
             <Head>
@@ -16,35 +17,66 @@ export default function Gallery({ photosDB }) {
                 <h1 className="text-6xl font-bold">
                     Gallery.
                 </h1>
-                <div className="grid grid-cols-3 gap-4 items-center max-w-4xl mt-6 sm:w-full">
-                    {photosDB.photos.map(photo => (
-                        <div key={photo.id}>
-                        <GalleryCard id={photo.id} title={photo.title} photoURL={photo.url} />
+                <div className='pt-2 flex flex-wrap gap-4'>
+                    {albums.map(album => (
+                        <div key={album._id}>
+                            <PreviewCard
+                                imgSrc={album.src}
+                                title={album._id.replace('-', ' ')}
+                                subtitle={album.count + " images available"}
+                                body='Example body'
+                                url={`/album/${album._id}`}
+                                width={album.width}
+                                height={album.height}
+                            />
                         </div>
                     ))}
                 </div>
-                <p className="mt-3 text-2xl">
-                    This is where our photos will be!
-                </p>
             </main>
         </div>
     )
 }
 
-Gallery.layout = Layout
-
 // This function gets called at build time on server-side.
 // It won't be called on client-side, so you can even do
 // direct database queries. See the "Technical details" section.
-export async function getStaticProps() {
-    const photosDB = await getPhotos()
+export async function getServerSideProps() {
+    const { db } = await connectToDatabase();
 
+    // Get distinct album names
+    // const albums = await db
+    //     .collection("gallery")
+    //     .distinct("album")
+
+    // Get random document of distinct album value
+    const albums = await db
+        .collection("gallery")
+        .aggregate([
+            // First Stage
+            /**
+             * _id: The id of the group.
+             * count: counts number of documents within each group
+             * src: finds first value for src field within each group
+             */
+            // https://stackoverflow.com/a/62950842
+            {
+                $group:
+                {
+                    _id: "$album",
+                    count: { $sum: 1 },
+                    src: { $first: "$src" },
+                    width: { $first: "$width" },
+                    height: { $first: "$height" },
+                }
+            }
+        ]).toArray()
+
+    console.log(albums)
     return {
-        // Passed to page components as prop
         props: {
-            photosDB
-        }
-    }
+            albums: JSON.parse(JSON.stringify(albums)),
+        },
+    };
 }
 
-Gallery.layout = Layout
+GalleryPage.layout = Layout

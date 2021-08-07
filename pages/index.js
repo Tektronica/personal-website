@@ -17,20 +17,18 @@ export default function Home({ allPostsData, metarsData }) {
         <MetarsStrip MetarsData={Object.values(metarsData)[0]} />
 
         <h1 className="text-6xl font-bold">
-          Hello.
+          Welcome!
         </h1>
 
         <p className="mt-3 text-2xl border-b border-black">
-          This is the Idiots travel guide.
+          To the Adventures of Ryan & Jessie
         </p>
         <div className="border-b border-black">
           <div className="pb-2 mt-3 text-justify">
             <p>
-              Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document.
-              To make your document look professionally produced, Word provides header, footer, cover page, and text box designs that complement each other. For example, you can add a matching cover page, header, and sidebar. Click Insert and then choose the elements you want from the different galleries.
-              Themes and styles also help keep your document coordinated. When you click Design and choose a new Theme, the pictures, charts, and SmartArt graphics change to match your new theme. When you apply styles, your headings change to match the new theme.
-              Save time in Word with new buttons that show up where you need them. To change the way a picture fits in your document, click it and a button for layout options appears next to it. When you work on a table, click where you want to add a row or a column, and then click the plus sign.
-              Reading is easier, too, in the new Reading view. You can collapse parts of the document and focus on the text you want. If you need to stop reading before you reach the end, Word remembers where you left off - even on another device.
+              At some point we’ll come up with a clever name for this website, but for now, fellow website-tester, consider yourself part of the “in” crowd who gets to see and appreciate a work-in-progress.  At the moment, we hope you will enjoy viewing our Iceland Elopement Gallery as well as an assortment of other photos documenting our Honeymoon adventure through Iceland.  We’re slowly adding more and more to this collection, including some writing about our adventures (journal style), and some handy maps to give context to where we trekked and where some of these photos were taken!
+              <br /><br />
+              Please bear with us as we continue adding things and learning about this whole website creation process.  If you have any suggestions, we’d love to hear them!
             </p>
           </div>
         </div>

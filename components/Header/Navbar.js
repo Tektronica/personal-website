@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <>
       <nav>
-        <div className="py-2 flex-shrink-0 flex items-center">
+        <div className="border-b border-b-2 border-black py-2 flex-shrink-0 flex items-center">
 
           <NavButton label={"Home"} path={"/"} />
           <NavButton label={"About"} path={"/about"} />

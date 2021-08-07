@@ -6,11 +6,11 @@ import Layout from '../../components/templates/Layout'
 export default function Post({ postData }) {
 
     return (
-        <div className="prose min-h-screen">
+        <div className="flex flex-col min-h-screen py-2">
             <Head>
                 <title>{postData.title}</title>
             </Head>
-            <article>
+            <article className="pl-36 pr-36 prose prose-lg max-w-none text-justify">
                 <h1 className="">{postData.title}</h1>
                 <div className="">
                     <Date dateString={postData.date} />
