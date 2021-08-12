@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Date from '../../components/date'
 import Layout from '../../components/templates/Layout'
-// import { connectToDatabase } from '../../lib/mongodb'
+import { connectToDatabase } from '../../lib/mongodb'
 import { XMasonry, XBlock } from "react-xmasonry"; // Imports precompiled bundle
 import Image from "next/image"
 import StackGrid from "react-stack-grid";
@@ -10,7 +10,7 @@ import Masonry from 'react-masonry-component';
 import ImageWithFallback from '../../lib/image-with-fallback';
 import Gallery from 'react-photo-gallery';
 import ExampleWithLightbox from '../../components/ExampleWithLightbox';
-import { photos } from "../../public/photos";
+// import { photos } from "../../public/photos";
 
 // mq      - the minimum viewport width (any unit)
 // columns - the number of vertical columns
@@ -52,18 +52,18 @@ const toBase64 = (str) =>
 
 const imagesLoadedOptions = { background: '.my-bg-image-el' }
 
-export default function Album({ }) {
+export default function Album({ photos }) {
 
     return (
         <div className="flex flex-col justify-center min-h-screen">
             <Head>
-                <title>Placeholder</title>
-                {/* <title>{photos[0].album}</title> */}
+                {/* <title>Placeholder</title> */}
+                <title>{photos[0].album}</title>
             </Head>
             
             <h1 className="text-6xl font-bold uppercase">
-                Placeholder
-                {/* {photos[0].album.replace('-', ' ')} */}
+                {/* Placeholder */}
+                {photos[0].album.replace('-', ' ')}
             </h1>
 
             <article>
@@ -174,24 +174,24 @@ export default function Album({ }) {
 // This function gets called at build time on server-side.
 // It won't be called on client-side, so you can even do
 // direct database queries. See the "Technical details" section.
-// export async function getServerSideProps({ params }) {
-//     // const res = await fetch("https://jsonplaceholder.typicode.com/photos");
-//     // const gallery = await res.json();
-//     // return { props: { photos: gallery }, };
+export async function getServerSideProps({ params }) {
+    // const res = await fetch("https://jsonplaceholder.typicode.com/photos");
+    // const gallery = await res.json();
+    // return { props: { photos: gallery }, };
 
-//     const { db } = await connectToDatabase();
-//     const gallery = await db
-//         .collection("gallery")
-//         .find({ album: params.album })
-//         .sort({ date: 1 })
-//         .limit(150)
-//         .toArray();
+    const { db } = await connectToDatabase();
+    const gallery = await db
+        .collection("gallery")
+        .find({ album: params.album })
+        .sort({ date: 1 })
+        .limit(150)
+        .toArray();
 
-//     return {
-//         props: {
-//             photos: JSON.parse(JSON.stringify(gallery)),
-//         },
-//     };
-// }
+    return {
+        props: {
+            photos: JSON.parse(JSON.stringify(gallery)),
+        },
+    };
+}
 
 Album.layout = Layout
