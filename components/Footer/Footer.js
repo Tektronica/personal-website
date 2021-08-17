@@ -26,7 +26,7 @@ const Navbar = () => {
                         rel="noopener noreferrer"
                     >
                         Powered by{' '}
-                        <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
+                        <img src="/tektronica.svg" alt="Tektronica Logo" className="h-8 ml-2" />
                     </a>
 
                 </div>
