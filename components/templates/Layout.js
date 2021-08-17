@@ -10,7 +10,7 @@ export default function Layout({ children }) {
 
                 <Navbar />
 
-                <div className="mb-6 bg-white">
+                <div className="sm:px-6 sm:px-6 mb-6 bg-white">
                     {children}
                 </div>
 
