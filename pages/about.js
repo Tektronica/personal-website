@@ -20,13 +20,18 @@ export default function About({ photo }) {
                 <p className="mt-3 text-2xl">
                     Who are we?!
                 </p>
-                <ExampleWithLightbox photos={photo} />
-                <h2 className="">
-                    Title: {photo[0].title}
-                </h2>
-                <h2 className="">
-                    Description: {photo[0].description}
-                </h2>
+
+                {/* <ExampleWithLightbox photos={photo} /> */}
+                <Image src={photo[0].src} alt={photo[0].title} width={photo[0].width} height={photo[0].height} />
+                
+                <div className="mt-4 border-b border-b-black border-t border-t-black">
+                    <h2 className="">
+                        <div className="text-pink-500 font-bold inline">Title:</div>  {photo[0].title}
+                    </h2>
+                    <h2 className="">
+                        <div className="text-pink-500 font-bold inline">Description:</div> {photo[0].description}
+                    </h2>
+                </div>
 
                 <div className="pb-2 mt-3 text-justify">
                     <p>

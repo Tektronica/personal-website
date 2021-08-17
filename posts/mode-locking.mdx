@@ -2,9 +2,10 @@
 title: 'Laser Mode Locking'
 date: '2021-06-04'
 description: 'Mode locking!'
+type: 'tech'
 ---
 
-<!-- # Table of Contents
+## Table of Contents
 1. [Introduction](#introduction)
 2. [Lasers, an overview](#lasers-an-overview)
 3. [Photon Absorption and Emission](#photon-absorption-and-emission)
@@ -15,18 +16,18 @@ description: 'Mode locking!'
 8. [Longitudinal Modes](#longitudinal-modes)
 9. [Mode Locking](#mode-locking)
 10. [Transverse Modes](#transverse-modes)
-11. [Sources](#sources) -->
+11. [Sources](#sources)
 
-# Introduction
+## Introduction
 
 This demonstration explores cavity-modes and mode-locked lasers. The
 simulation is of a mode-locked laser where the cavity length, the gain
 medium, and the number of modes centered around the central mode
 frequency are specified.
 
-![](/media/GUI.png)
+<Image alt={`GUI`} src={`/images/mode-locking/GUI.png`} width={1186} height={698}  />
 
-# Lasers, an overview
+## Lasers, an overview
 
 Lasers are highly tunable devices capable of either delivering a very
 narrow (near single) frequency of light or a broadband of frequencies
@@ -43,7 +44,7 @@ stimulated emissions inside a laser device is what led to its own
 namesake since LASER was initially just the acronym for “**L**ight
 **A**mplification by **S**timulated **E**mission of **R**adiation”.
 
-# Photon Absorption and Emission
+## Photon Absorption and Emission
 
 Quantum mechanics describes several possible interactions between
 photons and atoms; the simplest being the absorption of a photon in
@@ -61,10 +62,8 @@ absorbed or emitted, was directly proportional to the frequency of the
 radiation by the scalar constant, Planck’s constant. Consequently,
 Planck’s relation states the photon energy is:
 
-<p align="center">
 <img src="https://latex.codecogs.com/svg.image?\bg_white&space;E=\frac{hf}{1.6\times10^{-19}&space;[J]}\quad[eV]"
 title="1111" />
-</p>
 
 Furthermore, Bohr established a frequency condition which stated the
 energy absorbed or emitted by an atom during an electron transition is
@@ -114,9 +113,9 @@ is lost to the emitted photon rather than gained.
 The diagram below summarizes the various forms of photon interaction so
 far discussed:
 
-<p align="center">
-<img src="media/emission.png"/>
-</p>
+
+<Image alt={`emission`} src={`/images/mode-locking/emission.png`} width={549} height={299}  />
+
 
 > Three forms of photon interaction are illustrated for an atom described with a 3-level electron energy diagram.
 
@@ -126,7 +125,7 @@ far discussed:
 |**(B) Spontaneous Emission** |occurs when the electron can no longer hold its higher energy state and releases the original quanta of energy in the form of a photon causing the atom to drop back down to a lower energy level. |
 |**(C) Stimulated Emission**  |occurs when an atom can exist in a higher energy state long enough to interact with a photon causing a second photon to be generated.                                                              |
 
-# Population Inversion and the Journey to Excess Photon Generation
+## Population Inversion and the Journey to Excess Photon Generation
 
 Lasers exploit the principle of stimulated emission to encourage photon
 generation because the original transit photon isn’t lost in the
@@ -146,9 +145,7 @@ exponentially generate new photons within a system, clearly then more
 atoms need to occupy an energized state than their ground state. To do
 so, a process referred to as **Population Inversion** is employed.
 
-<p align="center">
-<img src="media/inversion.png"/>
-</p>
+<Image alt={`Inversion`} src={`/images/mode-locking/inversion.png`} width={1186} height={698}  />
 
 > Unlike in normal population distributions that occur naturally where
 more atoms occupy an unexcited ground state, a population inversion
@@ -203,9 +200,7 @@ transition levels is derived specifically from the probability for an
 electron to occupy a transition level overlapping with the probability
 to occupy the orbital ground state of an atom.
 
-<p align="center">
-<img src="media/distribution.jpg"/>
-</p>
+<Image alt={`distribution`} src={`/images/mode-locking/distribution.jpg`} width={767} height={258}  />
 
 > **Normal distribution** of atoms predicts that most atoms occupy their ground state. With **population inversion**, typically an external source of energy bumps atoms out of their ground state and into a metastable state that has a much slower lifetime.
 
@@ -215,7 +210,7 @@ to occupy the orbital ground state of an atom.
 | *N*<sub>1</sub> = *N*<sub>2</sub>          | When population of atoms occupying a ground state becomes equal to the population of atoms occupying an energized state, the photon production falls to zero. No new photons are produced and the photons you start with are the same number of photons that emerge out of the system.                                                                        |
 | *N*<sub>1</sub> \< *N*<sub>2</sub>         | **Population Inversion**. Most atoms occupy an energized state to promote photon generation. While absorption still occurs along a transit photon’s path through the atomic minefield, the generation of new photons greatly dominates the system. Without active pumping, population inversion tends to collapse back into *N*<sub>1</sub> = *N*<sub>2</sub>.|
 
-# Three- and Four-level Energy bands
+## Three- and Four-level Energy bands
 
 The first laser constructed by Theodore Maiman in 1960 was a three-level
 laser medium constructed of ruby (Cr3+:Al2O3). In this system
@@ -235,9 +230,7 @@ to be above the highest energy level, so how do they exist slightly
 above the ground state? What would cause atoms to normally skip through
 that metastable state and go on up to the other energy levels instead?
 
-<p align="center">
-<img src="media/levels.png"/>
-</p>
+<Image alt={`levels`} src={`/images/mode-locking/levels.png`} width={495} height={179}  />
 
 |           |                                                                                                                                                                                                           |
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -245,7 +238,7 @@ that metastable state and go on up to the other energy levels instead?
 | **(2)**   | **four-level system** where atoms drop down to an energy level still above the ground state. This construction is most efficient since pumping atoms back to a highly energized state requires less work. |
 | **(3)**   | **quasi three-level system** where atoms fall into an intermediate metastable state just above ground state.                                                                                              |
 
-# Laser Gain Mediums
+## Laser Gain Mediums
 
 |                    |                                                                                                                                                                                                                                                                                  |
 |--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -255,7 +248,7 @@ that metastable state and go on up to the other energy levels instead?
 | **Semiconductors** | gallium arsenide (GaAs), indium gallium arsenide (InGaAs), or gallium nitride (GaN)                                                                                                                                                                                              |
 | **Liquids**        | dye solutions as used in dye lasers.                                                                                                                                                                                                                                             |
 
-# Optical Cavity Resonators
+## Optical Cavity Resonators
 
 While a laser gain medium has the proclivity to emit photons when
 stimulated, a greater density in photon generation can be encouraged by
@@ -285,9 +278,7 @@ first **mode**, of the system and since energy of a photon is its
 propagation frequency, only photons of a specific energy are permitted
 to travel within the laser cavity.
 
-<p align="center">
-<img src="media/standing_waves.jpg"/>
-</p>
+<Image alt={`Standing Waves`} src={`/images/mode-locking/standing_waves.jpg`} width={423} height={358}  />
 
 Not all photons emitted by the gain medium form a standing wave inside
 the laser cavity. The longest wavelength (lowest frequency) permitted
@@ -295,9 +286,7 @@ is, in fact, determined by the length of the cavity. This is indicated
 by the primary wavelength, *λ*<sub>1</sub>, or first mode of the cavity
 being expressed as:
 
-<p align="center">
 <img src="https://latex.codecogs.com/svg.image?{\lambda_1}={2L}\quad\quad\text{or}\quad\quad{f_1}=\frac{2L}{c}" title="{\lambda_1}={2L}\quad\quad\text{or}\quad\quad{f_1}=\frac{2L}{c}" />
-</p>
 
 **Note**: losses due to diffraction and absorption within the cavity are
 omitted from the expression. However, losses typically modify the
@@ -317,9 +306,7 @@ How do collimator’s work? Do they polarize? Employ electromagnetic
 properties? Or is it that they are designed to only allowed the photons
 oriented a certain direction to escape?
 
-<p align="center">
-<img src="media/NdYag_laser.png"/>
-</p>
+<Image alt={`NdYag_laser`} src={`/images/mode-locking/NdYag_laser.png`} width={765} height={249}  />
 
 > Illustration of a Nd:YAG solid-state laser being pumped by a flashlamp to stimulate the emission of photons within a confocal laser cavity resonator. In most applications, the output laser light is narrowed, and the direction of photons arranged parallel to one another using a collimated lens.                                                                                               |
 
@@ -333,9 +320,7 @@ However, in these situations, a special reflective film is typically
 coated on either end of the crystal gain medium rather than using
 physical mirrors.
 
-<p align="center">
-<img src="media/fabry.png"/>
-</p>
+<Image alt={`fabry`} src={`/images/mode-locking/fabry.png`} width={400} height={193}  />
 
 > The precision of the Fabry–Pérot cavity makes it suitable for
 > applications where alignment is critical. For example, the LIGO
@@ -353,11 +338,9 @@ where the gain medium is placed. These cavities are typically used in
 applications where more uniformly distributed beam irradiance is focused
 at the beam center since narrower beams produce less angular deviation.
 
-<p align="center">
-<img src="media/confocal.png"/>
-</p>
+<Image alt={`confocal`} src={`/images/mode-locking/confocal.png`} width={401} height={398}  />
 
-# Longitudinal Modes
+## Longitudinal Modes
 
 Modes besides just the fundamental wavelength, *λ*<sub>1</sub>, can
 exist within a cavity. Revisiting the vibrating string example from
@@ -374,9 +357,7 @@ laser gain medium emitting the photons as well.
 The standing wave equation for the fundamental mode of a laser cavity
 with an undetermined phase *φ* is represented as:
 
-<p align="center">
 <img src="https://latex.codecogs.com/svg.image?\bg_white&space;y(t)&space;=&space;A\sin{\left(2\pi{f_{1}{t}}\pm\varphi\right)}&space;=&space;\boxed{A\sin{\left(2\pi\frac{c}{\lambda_{1}}t\pm\varphi\right)}}" title="\bg_white y(t) = A\sin{\left(2\pi{f_{1}{t}}\pm\varphi\right)} = \boxed{A\sin{\left(2\pi\frac{c}{\lambda_{1}}t\pm\varphi\right)}}" />
-</p>
 
 The frequency, *f*, is the rate at which a photon propagates through a
 medium and should not be confused with the velocity at which the photon
@@ -386,9 +367,7 @@ which the photon propagates through that cavity must thereby be
 proportional to the length as well. Consequently, the frequency at which
 a standing wave within the laser cavity is expressed as:
 
-<p align="center">
 <img src="https://latex.codecogs.com/svg.image?{f_1}=\frac{c}{\lambda_1}=\boxed{\frac{c}{2L}}" title="{f_1}=\frac{c}{\lambda_1}=\boxed{\frac{c}{2L}}" />
-</p>
 
 In the above expression, both length and velocity, c, of the frequency
 must remain fixed. Then, to obey the rule that a standing wave must
@@ -397,9 +376,7 @@ frequency modes permitted must be an integer multiple, q, of the
 fundamental frequency of the cavity. Thus, discrete modes, q, of the
 radiated frequencies of photons occupying the cavity is expressed as:
 
-<p align="center">
 <img src="https://latex.codecogs.com/svg.image?{f_q}=\boxed{{q}\cdot\frac{c}{2L}}" title="{f_q}=\boxed{{q}\cdot\frac{c}{2L}}" />
-</p>
 
 Non-integer values of q are not permitted since the resultant wave
 within the cavity would have discontinuous endpoints that do not match
@@ -407,13 +384,9 @@ up. Subsequently, the cavity modes are truly discretely spaced since the
 frequency separation, or difference, of two neighboring modes resolves
 the fundamental frequency of the laser cavity. In other words:
 
-<p align="center">
 <img src="https://latex.codecogs.com/svg.image?\boxed{{\Delta{f}}={f_q}-{f_{q-1}=\frac{c}{2L}" title="\boxed{{\Delta{f}}={f_q}-{f_{q-1}=\frac{c}{2L}" />
-</p>
 
-<p align="center">
-<img src="media/longitudinal.png"/>
-</p>
+<Image alt={`longitudinal`} src={`/images/mode-locking/longitudinal.png`} width={403} height={316} />
 
 The number of possible longitudinal modes of a cavity is determined by
 the gain bandwidth of the active gain medium. By the very nature of
@@ -433,11 +406,9 @@ within the cavity. For gaussian distributions, the laser threshold is
 typically expressed as the full width, half max (FWHM) of the gain
 curve. That is, the width of the curve at half the maximum value.
 
-<p align="center">
-<img src="media/gain_medium.gif"/>
-</p>
+<Image alt={`gain_medium`} src={`/images/mode-locking/gain_medium.gif`} width={476} height={540}  />
 
-# Mode Locking
+## Mode Locking
 
 The gain curve and cavity length determine the number of longitudinal
 modes emitted. However, these standing waves are seldom in phase with
@@ -454,11 +425,9 @@ mode-locked laser.
 > caused by separation of corneal tissue is then folded back to allow
 > reshaping of the corneal tissue using an excimer lens.
 
-<p align="center">
-<img src="media/mode_lock.png"/>
-</p>
+<Image alt={`mode_lock`} src={`/images/mode-locking/mode_lock.png`} width={521} height={515}  />
 
-# Transverse Modes
+## Transverse Modes
 
 The transverse electromagnetic mode (TEM) structure of a laser beam
 describes the distribution of intensity (power) across the beam
@@ -475,9 +444,7 @@ require greater care. Why is the output of longitudinal such a nicely
 behaved wavefront, but for transverse it seems… a bit of a mess, from
 this photo?
 
-<p align="center">
-<img src="media/transverse_longitudinal.png"/>
-</p>
+<Image alt={`transverse_longitudinal`} src={`/images/mode-locking/transverse_longitudinal.png`} width={596} height={428}  />
 
 Basic experiments can demonstrate the various lower order transverse
 modes. For instance, mounting one of the cavity mirrors onto a precision
@@ -492,11 +459,10 @@ narrowing aperture in line with the beam. Narrowing the aperture removes
 higher order transverse modes from the beam while passing only the
 fundamental transverse mode, TEM00.
 
-<p align="center">
-<img src="media/gaussian.png" />
-</p>
+<Image alt={`gaussian`} src={`/images/mode-locking/gaussian.png`} width={790} height={335}  />
 
-# Sources
+
+<!-- ## Sources
 
 <https://micro.magnet.fsu.edu/primer/java/lasers/electroncycle/index.html>
 
@@ -522,4 +488,4 @@ fundamental transverse mode, TEM00.
 
 <https://physics.stackexchange.com/questions/75247/decay-of-metastable-state-spontaneous-vs-stimulated-emission>
 
-<https://www.photonlexicon.com/laserfaq/laserstr.htm>
+<https://www.photonlexicon.com/laserfaq/laserstr.htm> -->

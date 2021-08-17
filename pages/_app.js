@@ -1,5 +1,7 @@
 import 'tailwindcss/tailwind.css'
 import '../styles/index.css'
+import '../themes/prism-xonokai.css'
+
 // import Layout from '../components/templates/Layout'
 // https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
 

@@ -5,6 +5,7 @@ import { getMETARS } from '../lib/metars'
 import MetarsStrip from "../lib/metars"
 import { getSortedPostsData } from '../lib/posts'
 
+
 export default function Home({ allPostsData, metarsData }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
@@ -34,41 +35,41 @@ export default function Home({ allPostsData, metarsData }) {
         </div>
         <div className="flex flex-wrap gap-4 items-center  mt-6 sm:w-full">
 
-          {allPostsData.map(({ id, date, title }) => (
+          {allPostsData.map(({ id, date, title, description, type}) => (
             <div className="w-full" key={id}>
               <SlimCard l
-                label={title}
-                color={"yellow"}
-                path={`/posts/${id}`}
-                description={"Instantly deploy your Next.js site to a public URL with Vercel."}
+                label={ title }
+                type={ type }
+                path={ `/posts/${id}` }
+                description={description}
               />
             </div>
           ))}
 
           <SlimCard l
             label={"Documentation"}
-            color={"green"}
+            type={ 'website' }
             path={"https://nextjs.org/docs"}
             description={"Find in-depth information about Next.js features and API."}
           />
 
           <SlimCard l
             label={"Learn"}
-            color={"blue"}
+            type={ 'website' }
             path={"https://nextjs.org/learn"}
             description={"Learn about Next.js in an interactive course with quizzes!"}
           />
 
           <SlimCard l
             label={"Examples"}
-            color={"pink"}
+            type={ 'website' }
             path={"https://github.com/vercel/next.js/tree/master/examples"}
             description={"Discover and deploy boilerplate example Next.js projects."}
           />
 
           <SlimCard l
             label={"Deploy"}
-            color={"purple"}
+            type={ 'website' }
             path={"https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"}
             description={"Instantly deploy your Next.js site to a public URL with Vercel."}
           />
@@ -92,5 +93,17 @@ export async function getStaticProps() {
     }
   }
 }
+
+// export async function getStaticProps() {
+//   const allPostsData = getSortedPostsData()
+//   const metarsData = await getMETARS()
+
+//   return {
+//     // Passed to page components as prop
+//     props: {
+//       allPostsData, metarsData
+//     }
+//   }
+// }
 
 Home.layout = Layout

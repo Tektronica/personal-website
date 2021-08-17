@@ -19,3 +19,17 @@
       box-shadow: 0.125rem 0.125rem 0 0px #000;
     }
   }
+
+/* style links added by rehype-autolink-headings, see svelte.config.js */
+/* https://github.com/janosh/svelte-toc/blob/8493df334a11661eddf03434372f6cd71ea313c1/site/static/global.css */
+:where(h2, h3, h4, h5, h6) a {
+  opacity: 0;
+  transition: 0.3s;
+  margin-left: 8pt;
+  background-size: contain;
+  margin-top: 4pt;
+
+}
+:where(h2, h3, h4, h5, h6):hover a {
+  opacity: 1;
+}

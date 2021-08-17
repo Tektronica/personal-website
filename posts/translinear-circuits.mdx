@@ -1,0 +1,417 @@
+---
+title: 'Translinear Circuits'
+date: '2020-04-07'
+description: 'Translinear circuits are a family of current-mode topologies which hinge on the exponential current-voltage relationship'
+type: 'tech'
+---
+
+Translinear circuits are a family of current-mode topologies which hinge on the exponential current-voltage relationship in BJT devices operating within active region or in weak inversion for CMOS devices. This gives rise to an entire family of analog computational circuits relatively straightforward in deriving. Multipliers and dividers, square rooters and filters are just some of the implementable computational processes.
+
+## I-V characteristic of the BJT
+
+The I-V characteristic of a transistor is identical to the diode I-V relationship where collector current is
+
+<img
+src="https://latex.codecogs.com/svg.latex?I_{C}=I_{S}\exp{\left(\frac{V_{BE}}{V_{T}}\right)}"
+title="I_{C}=I_{S}\exp{\left(\frac{V_{BE}}{V_{T}}\right)}"
+/>
+
+The base-emitter junction voltage, V_BE, typically spans the range of 0.6V to 0.8V depending on what region the transistor operating point lies. For analysis in this text, 0.7V will nominally be assumed in the forward-active region. The reverse saturation (scale) current, I_S, describes the current attributed to the diffusion of minority carriers from neutral regions within the doped silicon to the depletion region due to thermal generation. The saturation current can vary anywhere from 0.1fA to 10fA due to temperature and manufacturing process.
+
+## variations in BJT operating parameters
+
+Translinear circuits exploits the exponential I-V relationship to work with great linearity. However, when transistors are unmatched by both effects from temperature and manufacturing process, nonlinearity becomes an issue. For instance, the base-emitter forward voltage, V_BE, of a BJT is negatively proportional to increasing temperature at a rate equal to the negative temperature coefficient -2mV/°C. Manufacturing variations can also play a significant role in operating parameters since variation in silicon geometry can significantly vary the diffusion of holes and electrons and thus the reverse saturation current, I_s of the device.
+
+While not immediately apparent, the saturation current, I_S, is not only dependent on geometry but temperature as well. Shown below is the equation for saturation current modeled by N and P sides.
+
+<img
+src="https://latex.codecogs.com/svg.latex?I_{S}=qAn_{i}^{2}\left(\frac{1}{N_{D}}\sqrt{\frac{D_{p}}{\tau_{p}}}+\frac{1}{N_{A}}\sqrt{\frac{D_{n}}{\tau_{n}}}\right)"
+title="I_{S}=qAn_{i}^{2}\left(\frac{1}{N_{D}}\sqrt{\frac{D_{p}}{\tau_{p}}}+\frac{1}{N_{A}}\sqrt{\frac{D_{n}}{\tau_{n}}}\right)"
+/>
+
+In bipolar semiconductors, the emitter dopant concentration (N_D) is much greater than the base dopant concentration (N_A). Thus, by simplifying the expression, we reveal how the diffusion coefficient, D_n, and intrinsic carrier concentration, n_i^2, can be modeled as temperature dependent where E and B are constants related to fundamental quantities and processing variables independent of temperature.
+
+<img
+src="https://latex.codecogs.com/svg.latex?I_{S}=\frac{qA}{N_{B}W_{B}}D_{n}n_i^{2}=\frac{qA}{N_{B}W_{B}}{\cdot}\overbrace{\left(\frac{kT}{q}ET^{-n}\right)}^{D_{n}}{\cdot}\overbrace{BT^{3}\exp{\left(-\frac{qV_{g}}{kT}\right)}}^{n_{i}^{2}}{\quad}\text{where}{\quad}N_{D}{\gg}N_{A}"
+title="I_{S}=\frac{qA}{N_{B}W_{B}}D_{n}n_i^{2}=\frac{qA}{N_{B}W_{B}}{\cdot}\overbrace{\left(\frac{kT}{q}ET^{-n}\right)}^{D_{n}}{\cdot}\overbrace{BT^{3}\exp{\left(-\frac{qV_{g}}{kT}\right)}}^{n_{i}^{2}}{\quad}\text{where}{\quad}N_{D}{\gg}N_{A}"
+/>
+
+Consequently, if all transistors are identically processed and placed onto the same substrate where temperature equilibrium has been achieved, then they should have identical operational parameters.
+
+## the current mirror
+
+The basic two-transistor current mirror shown to the right is the simplest example of a translinear circuit leveraging the exponential current-voltage relationship of the transistors. The collector current of I_2 will equal I_1 precisely because voltage quantities V_1 and V_2 will also be equal, as will be shown. 
+
+<Image 
+alt={`01_current_mirror.png`} src={`/images/translinear-circuit/01_current_mirror.png`}
+width={260} height={395}
+/>
+
+At the heart of the mirror, the collector of Q1 is tied to its base, which shorts the base-collector junction forcing Q1 into its forward active region. This configuration is referred to as a diode connected BJT ensuring current I_1 and a forward junction voltage V_BE of approximately 0.7V. 
+
+Since the base of Q1 and Q2 are tied and their emitters held at the same ground reference, the base-emitter junction voltage of Q1 forces the same voltage drop across the base-emitter junction of Q2. 
+
+As per KVL, 
+
+<img
+src="https://latex.codecogs.com/svg.latex?\boxed{V_{1}=V_{2}}=\boxed{V_{BE}{\quad}{\approx}{\quad}0.7V}"
+title="\boxed{V_{1}=V_{2}}=\boxed{V_{BE}{\quad}{\approx}{\quad}0.7V}"
+/>
+
+which is the foundation of a translinear loop where the voltages of cascaded transistors in the left-half circuit must equal the sum voltage of cascaded transistors in the right-half circuit. However, since this basic current mirror is comprised of two transistors, each loop is simply composed of only one voltage.
+
+Since Q1 is in the forward active region, any change in forward voltage of the base-emitter junction of Q1 will change the collector current I_1 as modeled by the exponential relationship. At Q2, the collector current I_2 will be equal to I_1 since Q1 governs the base-emitter voltage drop across the mutually tied base terminals to the respective emitters for both Q1 and Q2. Assuming a finite base current, Q1 pulls a base current proportional to the collector, which is thereby equal to the base current of Q2.
+
+To demonstrate this, the collector current is controlled by the base-emitter junction voltage V_BE, which rearranged yields
+
+<img
+src="https://latex.codecogs.com/svg.latex?I_{C}=I_{S}\exp{\left(\frac{V_{BE}}{V_{T}}\right)}"
+title="I_{C}=I_{S}\exp{\left(\frac{V_{BE}}{V_{T}}\right)}"
+/>
+
+<img
+src="https://latex.codecogs.com/svg.latex?V_{BE}=V_{T}\ln{\left(\frac{I_{C}}{I_{S}}\right)}"
+title="V_{BE}=V_{T}\ln{\left(\frac{I_{C}}{I_{S}}\right)}"
+/>
+
+which can be substituted into our KVL expression. Since Q1 governs the base voltage shared by both transistors and each transistor is held above the same reference,
+
+<img
+src="https://latex.codecogs.com/svg.latex?V_{1}=V_{2}{\quad}{\rightarrow}{\quad}V_{T_{1}}\ln{\left(\frac{I_{C1}}{I_{S1}}\right)}=V_{T_{2}}\ln{\left(\frac{I_{C2}}{I_{S2}}\right)}"
+title="V_{1}=V_{2}{\quad}{\rightarrow}{\quad}V_{T_{1}}\ln{\left(\frac{I_{C1}}{I_{S1}}\right)}=V_{T_{2}}\ln{\left(\frac{I_{C2}}{I_{S2}}\right)}"
+/>
+
+To simplify further, direct attention to the thermal voltage, V_T, and saturation current, I_S, quantities for both transistors. If the transistors are unmatched, the manufacturing characteristics, which determine the operational parameters of the device will also be unmatched. However, assume Q1 and Q2 were built onto the same process silicon with a monolithic construction placing Q1 and Q2 on the same substrate forcing near temperature uniformity. This ensures the saturation current quantities and thermal voltages are equal, which therefore assures the collector currents for both transistors are also equal. That is,
+
+<img
+src="https://latex.codecogs.com/svg.latex?\begin{matrix}T_{1}=T_{2}\\I_{S_{1}}=I_{S_{2}}\\V_{T_{1}}=V_{T_{2}}\end{matrix}"
+title="\begin{matrix}T_{1}=T_{2}\\I_{S_{1}}=I_{S_{2}}\\V_{T_{1}}=V_{T_{2}}\end{matrix}"
+/>
+
+Thus, revisiting the following relationship,
+
+<img
+src="https://latex.codecogs.com/svg.latex?V_{1}=V_{2}{\quad}{\rightarrow}{\quad}V_{T_{1}}\ln{\left(\frac{I_{C1}}{I_{S1}}\right)}=V_{T_{2}}\ln{\left(\frac{I_{C2}}{I_{S2}}\right)}"
+title="V_{1}=V_{2}{\quad}{\rightarrow}{\quad}V_{T_{1}}\ln{\left(\frac{I_{C1}}{I_{S1}}\right)}=V_{T_{2}}\ln{\left(\frac{I_{C2}}{I_{S2}}\right)}"
+/>
+
+The V_T and I_S terms cancel when transistors are well matched, which simplifies to
+
+<img
+src="https://latex.codecogs.com/svg.latex?\boxed{V_{1}=V_{2}{\quad}{\rightarrow}{\quad}I_{C1}=I_{C2}}"
+title="\boxed{V_{1}=V_{2}{\quad}{\rightarrow}{\quad}I_{C1}=I_{C2}}"
+/>
+
+which is the basic function of a current mirror. However, note how critical transistors Q1 and Q2 must match. For this reason, translinear circuits are seldom implemented discretely but instead on monolithically integrated transistor-array packages or on substrates occupying other circuitry performing some larger computational function.
+
+Employing emitter degeneration introduced by the Widlar current mirror is another method for reducing variation between any two transistors in a current mirror when absolute matching is not achievable. A resistor placed at the emitter of Q2 modifies the two-transistor mirror to be less susceptible to temperature mismatch by reducing the effect of base-emitter tolerances.  
+
+## the translinear principle
+
+The two-transistor current mirror introduced as a basic translinear element was highlighted as leveraging the exponential current-voltage relationship and giving way to translinearity. That is, in cascaded transistor arrangements, the active devices can be exploited by their exponential I-V relationship to operate with great linearity. In the example of the basic current mirror, leveraging the relationship between base-emitter voltage and the collector current of Q1 governed an identical current be present on a slave transistor, Q2.  However, there is a greater practical use to translinearity requiring more than two transistors to be sufficiently realized. 
+
+Shown below is a translinear circuit comprised of four transistors. A line of symmetry drawn down the middle of the circuit indicates an equal number of transistors occupy both the left and right side. Because of this symmetry, there are two endpoints which form a translinear loop governed by KVL. One endpoint, inhabited by the emitters of Q1 and Q4, is held at ground while the second endpoint, occupied by the base terminals of Q2 and Q3, held at some higher voltage potential. 
+
+<Image 
+alt={`02_translinear_principle.png`} src={`/images/translinear-circuit/02_translinear_principle.png`}
+width={452} height={449}
+/>
+
+As per KVL, the voltage at the base of Q2 and Q3 is quickly discerned by inspection of the arrangement of Q1 and Q2 and similarly Q3 and Q4. Since each respective pair are base-to-emitter tied, the base-emitter voltage will cascade additively such that
+
+<img
+src="https://latex.codecogs.com/svg.latex?\boxed{V_{1}+V_{2}=V_{3}+V_{4}}=\boxed{2V_{BE}{\quad}{\approx}{\quad}1.4V}"
+title="\boxed{V_{1}+V_{2}=V_{3}+V_{4}}=\boxed{2V_{BE}{\quad}{\approx}{\quad}1.4V}"
+/>
+
+Obeying the exponential current-voltage relationship and assuming no base current (infinite beta) as well as disregarding the Early effect, the collector currents of the left-half and right half are related by 
+
+<img
+src="https://latex.codecogs.com/svg.latex?V_{1}+V_{2}=V_{3}+V_{4}"
+title="V_{1}+V_{2}=V_{3}+V_{4}"
+/>
+
+<img
+src="https://latex.codecogs.com/svg.latex?V_{T}\ln{\left(\frac{I_{C1}}{I_{S}}\right)}+V_{T}\ln{\left(\frac{I_{C2}}{I_{S}}\right)}=V_{T}\ln{\left(\frac{I_{C3}}{I_{S}}\right)}+V_{T}\ln{\left(\frac{I_{C4}}{I_{S}}\right)}"
+title="V_{T}\ln{\left(\frac{I_{C1}}{I_{S}}\right)}+V_{T}\ln{\left(\frac{I_{C2}}{I_{S}}\right)}=V_{T}\ln{\left(\frac{I_{C3}}{I_{S}}\right)}+V_{T}\ln{\left(\frac{I_{C4}}{I_{S}}\right)}"
+/>
+
+<img
+src="https://latex.codecogs.com/svg.latex?\ln{\left(\frac{I_{C1}}{I_S}\frac{I_{C2}}{I_S}\right)}=\ln{\left(\frac{I_{C3}}{I_S}\frac{I_{C4}}{I_S}\right)}"
+title="\ln{\left(\frac{I_{C1}}{I_S}\frac{I_{C2}}{I_S}\right)}=\ln{\left(\frac{I_{C3}}{I_S}\frac{I_{C4}}{I_S}\right)}"
+/>
+
+<img
+src="https://latex.codecogs.com/svg.latex?\boxed{I_{C1}I_{C2}=I_{C3}I_{C4}}"
+title="\boxed{I_{C1}I_{C2}=I_{C3}I_{C4}}"
+/>
+
+This heralds in a key property, that is, the **translinear principle**, which states for a closed-loop symmetrically arranged number of well-matched transistors, the product of currents occupying the left-half circuit must equal the product of currents occupying the right-half circuit.
+
+The translinear principle is dependent on the exponential current-voltage relationship which ensures the general relationship
+
+<img
+src="https://latex.codecogs.com/svg.latex?\begin{matrix}\overbrace{\sum_{i=1}^{n/2}V_{i}}^{CCW}=\overbrace{\sum_{k=0}^{n/2}V_{n-k}}^{CW}&{\quad}\rightarrow {\quad}&\overbrace{\sum_{i=1}^{n/2}V_{i}}^{LH}=\overbrace{\sum_{k=0}^{n/2}V_{n-k}}^{RH}\\\\(V_{1}+V_{2})=(V_{4}+V_{3})&&(I_{1}{\cdot}I_{2})=(I_{4}{\cdot}I_{3})
+\end{matrix}"
+title="\begin{matrix}\overbrace{\sum_{i=1}^{n/2}V_{i}}^{CCW}=\overbrace{\sum_{k=0}^{n/2}V_{n-k}}^{CW}&{\quad}\rightarrow {\quad}&\overbrace{\sum_{i=1}^{n/2}V_{i}}^{LH}=\overbrace{\sum_{k=0}^{n/2}V_{n-k}}^{RH}\\\\(V_{1}+V_{2})=(V_{4}+V_{3})&&(I_{1}{\cdot}I_{2})=(I_{4}{\cdot}I_{3})
+\end{matrix}"
+/>
+
+which states if the counter-clockwise (CCW) sum of base-emitter voltages equals the clockwise (CW) voltage sum, then the product of collector currents in the left-half (LH) circuit are equal to the product of collector currents occupying the right-half (RH) circuit.
+
+## type A and type B translinear loops
+
+Translinear loops are broken into two subgroups comprised of Type A and Type B cells. Type A cells are referred to as “up-down” (or alternating) since the translinear loop alternate between clockwise and counterclockwise elements. Type B cells are referred to as “stacked” (or balanced) since clockwise and counterclockwise loops are separate interactions isolated to one half of the topology. While each loop can realize an equal number of implementations, there is an inherent flaw to Type A cells which are susceptible to large well (or substrate) capacitance limiting frequency response. Another drawback is related to the amount of consumed current within the loop. However, one distinct advantage of the alternating Type A cell is its suitability in low supply voltage designs. The Type A cell has a lateral cascade arrangement of translinear elements while the Type B cell has a longitudinal cascade (or stacked) arrangement of translinear elements. This means the supply voltage of a Type A cell must only exceed V_BE with sufficient headroom while a minimum of 2V_BE for a Type B cell.
+
+<Image 
+alt={`03_ab_topologies.png`} src={`/images/translinear-circuit/03_ab_topologies.png`}
+width={750} height={295}
+/>
+
+<!-- <Image 
+alt={`transverse_longitudinal`} src={`/images/translinear-circuit/04_diodes.png`}
+width={224} height={214}
+/> -->
+
+
+In translinear analysis, we are typically omitting base current, which assumes β=∞. However, finite beta is a very real issue in transistor topologies. The Type A cell, however, has a special immunity to finite beta, which helps contribute to very low multiplication errors. This is because the inner currents I_2  and I_3 are always proportionally a linear replication of the outer pair I_1 and I_4 and thus beta errors effectively cancel. Unfortunately, the Type B cell is not omitted from this immunity and is even often referred to as being “beta-allergic” for this reason. Consequently, the Type B cell has gain errors associated with finite beta requiring careful compensation in higher gain applications. Generally, though, the gain of a Type B cell has a ceiling of approximately G=10. 
+
+## multiplier and divider circuits
+
+<Image 
+alt={`05_multiplier.png`} src={`/images/translinear-circuit/05_multiplier.png`}
+width={452} height={370}
+/>
+
+## geometric mean circuits
+
+The **geometric** mean translinear topology computes:
+
+<img
+src="https://latex.codecogs.com/svg.latex?I_{z}=\sqrt{I_{x}{\cdot}I_{y}}"
+title="I_{z}=\sqrt{I_{x}{\cdot}I_{y}}"
+/>
+
+The realized topology is simply the reverse of the multiplier/divider circuit:
+
+<Image 
+alt={`06_geometric.png`} src={`/images/translinear-circuit/06_geometric.png`}
+width={452} height={370}
+/>
+
+>**Note:** the collector of Q1 is directly tied to the base of Q2 and Q3. This is not strictly
+>necessary but is the simplest biasing technique to ensure the translinear elements operate in
+>their forward active region.
+
+<div className="flex">
+<div className="flex-grow">
+<img
+src="https://latex.codecogs.com/svg.latex?\begin{matrix}V_{1}+V_{2}=V_{3}+V_{4}\\I_{1}I_{2}=I_{3}I_{4}\end{matrix}"
+title="\begin{matrix}V_{1}+V_{2}=V_{3}+V_{4}\\I_{1}I_{2}=I_{3}I_{4}\end{matrix}"
+/>
+</div>
+<div className="flex-grow">
+<img
+src="https://latex.codecogs.com/svg.latex?\\\rightarrow\\\rightarrow"
+title="\\\rightarrow\\\rightarrow"
+/>
+</div>
+<div className="flex-grow">
+<img
+src="https://latex.codecogs.com/svg.latex?\\I_{1}=I_{in}\\I_{2}=I_{ref}\\I_{3}=I_{4}=I_{out}"
+title="\\I_{1}=I_{in}\\I_{2}=I_{ref}\\I_{3}=I_{4}=I_{out}"
+/>
+</div>
+<div className="flex-grow">
+<img
+src="https://latex.codecogs.com/svg.latex?\\\rightarrow\\\rightarrow"
+title="\\\rightarrow\\\rightarrow"
+/>
+</div>
+<div className="flex-grow">
+<img
+src="https://latex.codecogs.com/svg.latex?\begin{matrix}V_{1}+V_{2}=V_{3}+V_{4}\\I_{1}I_{2}=I_{3}I_{4}\end{matrix}"
+title="\begin{matrix}V_{1}+V_{2}=V_{3}+V_{4}\\I_{1}I_{2}=I_{3}I_{4}\end{matrix}"
+/>
+</div>
+</div>
+
+In the following demo circuit, the supply rails have been reversed, which allows the output
+transimpedance amplifier, U2, to reference ground rather than the positive supply. The
+transconductance amplifier, U1, sources by ensuring proper biasing for Q1, Q4, and Q3.
+
+<Image 
+alt={`07_geometric_example.png`} src={`/images/translinear-circuit/07_geometric_example.png`}
+width={818} height={375}
+/>
+
+## summing circuits
+
+The following summing circuits are examples of an augmented Type “A” alternating translinear loop. The differential pair composed of Q2 and Q3 in ① is collector-tied and independently driven by Q1 and Q4, respectively. Obeying KVL and the translinear principle, the closed-loop pairs forming Q1 and Q2 on the left and Q3 and Q4 on the right form independent current mirrors with the differential pair summing currents I_a and I_b to form the current I_z such that
+
+<Image 
+alt={`08_darlington.png`} src={`/images/translinear-circuit/08_darlington.png`}
+width={977} height={341}
+/>
+
+<img
+src="https://latex.codecogs.com/svg.latex?I_{z}=I_{a}+I_{b}"
+title="I_{z}=I_{a}+I_{b}"
+/>
+
+With Q2 and Q3 operating independent to one another, the translinear loops are also independent. This ensures the summing current, I_z, remains only dependent on the input source currents. Consequently, the algebra for the left- and right-hand circuits can be performed independently as well. Assuming the topology is composed of tightly matched transistors, we omit the thermal voltage and reverse saturation current terms such that
+
+<img
+src="https://latex.codecogs.com/svg.latex?\begin{matrix}\begin{matrix}\text{Left-Hand}&\text{Right-Hand}\\\\V1-V2=0{\quad}&{\quad}V4-V3=0 \\\\\ln{\left(I_{x}\right)}-\ln{\left(I_{a}\right)}=0{\quad}&{\quad}\ln{\left(I_{y}\right)}-\ln{\left(I_{b}\right)}=0 \\\\\boxed{I_{x}=I_{a}}{\quad}&{\quad}\boxed{I_{y}=I_{b}}\end{matrix}\\\\I_{z}=I_{a}+I_{b}{\quad}{\rightarrow}{\quad}\boxed{I_z=I_{x}+I_{y}}\end{matrix}"
+title="\begin{matrix}\begin{matrix}\text{Left-Hand}&\text{Right-Hand}\\\\V1-V2=0{\quad}&{\quad}V4-V3=0 \\\\\ln{\left(I_{x}\right)}-\ln{\left(I_{a}\right)}=0{\quad}&{\quad}\ln{\left(I_{y}\right)}-\ln{\left(I_{b}\right)}=0 \\\\\boxed{I_{x}=I_{a}}{\quad}&{\quad}\boxed{I_{y}=I_{b}}\end{matrix}\\\\I_{z}=I_{a}+I_{b}{\quad}{\rightarrow}{\quad}\boxed{I_z=I_{x}+I_{y}}\end{matrix}"
+/>
+
+Standalone transistors used in summing circuits are notoriously inaccurate due to their finite
+current gain (). On the other hand, Darlington pairs, as shown in ②, can effectively replace the
+operation of a single transistor while greatly increasing the summing accuracy. The
+configuration ties the emitter to the base of a second transistor, which allows base current
+amplified by the first transistor to be amplified even further by the second. Consequently, this
+significantly increases the current gain, thereby reducing the amount of base current needed
+and limiting error current. In short, the Darlington pair brings an equivalent single transistor more
+in line with an ideal BJT model. However, disadvantages of this configuration are the base-
+emitter junction voltage is now effectively doubled to and observes a reduced bandwidth.
+
+## the vector sum and the overlapping loop
+
+Up until now, the translinear loops explored have all been constructed of an even-number of transistors
+arranged symmetrically. However, overlapping loops where an odd-number of transistors can also be
+quite common leading to some interesting results. A notable example is the vector sum of two or more
+inputs, which in its simplest configuration computes the Pythagorean operation for two inputs. The vector
+sum of which can be useful in the control of a state-variable oscillator computing the amplitude of two
+quadrature terms. The vector sum of and is defined as
+
+To understand the construction of a vector summation, we revisit the summing circuit first illustrated in
+①. However, now, the summing circuit is redrawn with an additional row of diode-connected BJTs
+composed of Q1, Q4, Q5, and Q8. The reasoning behind this augmentation is to leverage the topology of
+a squaring circuit, or the previous geometric mean example in which stacked diode-connected transistors introduce squared terms when in the appropriate configuration.
+
+<Image 
+alt={`09_vector_sum_wrong.png`} src={`/images/translinear-circuit/09_vector_sum_wrong.png`}
+width={468} height={341}
+/>
+
+In ③, the additional row retains symmetry but now resembles a Type “B” stacked translinear loop while
+fulfilling the same basic summation operation. Analyzing both the left- and right-hand loops
+independently,
+
+<img
+src="https://latex.codecogs.com/svg.latex?\begin{matrix}(V1+V2)-(V3+V4)=0{\quad}&{\quad}(V8+V7)-(V6+V5)=0\\\\\ln{\left(I_{x}\right)}+\ln{\left(I_{x}\right)}-\ln{\left(I_{a}\right)}-\ln{\left(I_{C4}\right)}=0{\quad}&{\quad}\ln{\left(I_{y}\right)}+\ln{\left(I_{y}\right)}-\ln{\left(I_{b}\right)}-\ln{\left(I_{C6}\right)}=0\\\\I_{a}I_{C4}=\left(I_{x}\right)^{2}{\quad}\text{where}{\quad}I_{a}=I_{C4}{\quad}&{\quad}I_{b}I_{C6}=\left(I_{y}\right)^{2}{\quad}\text{where}{\quad}I_{b}=I_{C6}\\\\\left(I_{a}\right)^{2}=\left(I_{x}\right)^{2}{\quad}&{\quad}\left(I_{a}\right)^{2}=\left(I_{y}\right)^{2}\\\\\boxed{I_{a}=I_{x}}{\quad}&{\quad}\boxed{I_{b}=I_{y}}\end{matrix}"
+title="\begin{matrix}(V1+V2)-(V3+V4)=0{\quad}&{\quad}(V8+V7)-(V6+V5)=0\\\\\ln{\left(I_{x}\right)}+\ln{\left(I_{x}\right)}-\ln{\left(I_{a}\right)}-\ln{\left(I_{C4}\right)}=0{\quad}&{\quad}\ln{\left(I_{y}\right)}+\ln{\left(I_{y}\right)}-\ln{\left(I_{b}\right)}-\ln{\left(I_{C6}\right)}=0\\\\I_{a}I_{C4}=\left(I_{x}\right)^{2}{\quad}\text{where}{\quad}I_{a}=I_{C4}{\quad}&{\quad}I_{b}I_{C6}=\left(I_{y}\right)^{2}{\quad}\text{where}{\quad}I_{b}=I_{C6}\\\\\left(I_{a}\right)^{2}=\left(I_{x}\right)^{2}{\quad}&{\quad}\left(I_{a}\right)^{2}=\left(I_{y}\right)^{2}\\\\\boxed{I_{a}=I_{x}}{\quad}&{\quad}\boxed{I_{b}=I_{y}}\end{matrix}"
+/>
+
+<img
+src="https://latex.codecogs.com/svg.latex?I_{z}=I_{a}+I_{b}{\rightarrow}\boxed{I_{z}=I_{x}+I_{y}}"
+title="I_{z}=I_{a}+I_{b}{\quad}{\rightarrow}{\quad}\boxed{I_{z}=I_{x}+I_{y}}"
+/>
+
+The algebra arrives at the same expression for the summation current, . However, stepping back through,
+the significance of placing an additional row of BJTs has allowed squared terms into the derivation for the
+summer as we anticipated. Unfortunately, the squared terms inevitably cancel one another leading to the
+familiar linear summation as seen before.
+
+The key in building a vector summing circuit lies in a small placement error of our stacked transistors. In
+③, the addition of Q1, Q4, Q5, and Q8 transistors placed below the emitter of each branch of the
+translinear summing circuit symmetrically altered the circuit. This symmetry results in the same linear
+summation as before because the line of symmetry acts as an isolation barrier between two independently,
+and now augmented, current mirrors. Let’s attempt to construct the vector sum topology without aid of
+any preconceived notions by first rearranging the vector sum expression:
+
+<img
+src="https://latex.codecogs.com/svg.latex?\left(I_{z}\right)^{2}=\left(I_{x}\right)^{2}+\left(I_{y}\right)^{2}"
+title="\left(I_{z}\right)^{2}=\left(I_{x}\right)^{2}+\left(I_{y}\right)^{2}"
+/>
+
+Since there is no immediate relationship to describe the explicit square-root operation with the translinear
+principle, we alternatively solve for the current implicitly by dividing a term of the squared such that
+
+<img
+src="https://latex.codecogs.com/svg.latex?I_{z}=\frac{\left(I_{x}\right)^{2}}{I_{z}}+\frac{\left(I_{y}\right)^{2}}{I_{z}}"
+title="I_{z}=\frac{\left(I_{x}\right)^{2}}{I_{z}}+\frac{\left(I_{y}\right)^{2}}{I_{z}}"
+/>
+
+Since the differential pair ensures the sum of the two collectors is
+
+<img
+src="https://latex.codecogs.com/svg.latex?I_{z}=I_{a}+I_{b}"
+title="I_{z}=I_{a}+I_{b}"
+/>
+
+KVL expressions can be found separately for the left- and right-hand loops, 
+
+<div className="flex">
+<div className="flex-grow">
+<img
+src="https://latex.codecogs.com/svg.latex?\begin{matrix}\text{Left-Hand}\\\\I_{a}=\frac{\left(I_{x}\right)^{2}}{I_{z}}\end{matrix}"
+title="\begin{matrix}\text{Left-Hand}\\\\I_{a}=\frac{\left(I_{x}\right)^{2}}{I_{z}}\end{matrix}"
+/>
+</div>
+<div className="flex-grow">
+<img
+src="https://latex.codecogs.com/svg.latex?\begin{matrix}\text{Left-Hand}\\\\I_{a}=\frac{\left(I_{y}\right)^{2}}{I_{z}}\end{matrix}"
+title="\begin{matrix}\text{Left-Hand}\\\\I_{a}=\frac{\left(I_{y}\right)^{2}}{I_{z}}\end{matrix}"
+/>
+</div>
+</div>
+
+Assuming tightly matched transistors, we omit the thermal voltage and reverse saturation current terms such that
+
+<div className="flex">
+<div className="flex-grow">
+<img
+src="https://latex.codecogs.com/svg.latex?\ln{\left(I_{a}\right)}=\ln{\left[\frac{\left(I_{x}\right)^{2}}{I_{z}}\right]}=2\ln{\left(I_{x}\right)-\ln{\left(I_{z}\right)}}"
+title="\ln{\left(I_{a}\right)}=\ln{\left[\frac{\left(I_{x}\right)^{2}}{I_{z}}\right]}=2\ln{\left(I_{x}\right)-\ln{\left(I_{z}\right)}}"
+/>
+</div>
+<div className="flex-grow">
+<img
+src="https://latex.codecogs.com/svg.latex?\ln{\left(I_{a}\right)}=\ln{\left[\frac{\left(I_{y}\right)^{2}}{I_{z}}\right]}=2\ln{\left(I_{y}\right)-\ln{\left(I_{z}\right)}}"
+title="\ln{\left(I_{a}\right)}=\ln{\left[\frac{\left(I_{y}\right)^{2}}{I_{z}}\right]}=2\ln{\left(I_{y}\right)-\ln{\left(I_{z}\right)}}"
+/>
+</div>
+</div>
+
+First rearranging to keep positive quantities to either side of the equality, the KVL expression for both the left- and right-hand loops are
+
+<div className="flex">
+<div className="flex-grow">
+<img
+src="https://latex.codecogs.com/svg.latex?2V_{x}=V_{a}+V_{z}"
+title="2V_{x}=V_{a}+V_{z}"
+/>
+</div>
+<div className="flex-grow">
+<img
+src="https://latex.codecogs.com/svg.latex?2V_{y}=V_{b}+V_{z}"
+title="2V_{y}=V_{b}+V_{z}"
+/>
+</div>
+</div>
+
+While the symmetric nature across loops is preserved, we have identified a shared voltage term, V_z, which must also be present within each loop. Since V_z carries the current I_z, which has been established as the current sum relating to some combination of both left- and right-hand loops, then the KVL loops are required to overlap in some way.
+
+Shown in ④ is the translinear circuit computing the vector sum for two inputs.
+
+<Image 
+alt={`10_vector_sum_correct.png`} src={`/images/translinear-circuit/10_vector_sum_correct.png`}
+width={472} height={341}
+/>
+
+Like before, Q3 and Q5 form a differential pair, collector-tied, summing two collector currents driven by separate base connections. However, unlike before, the odd number of transistors present in the second row leaves the line of symmetry separating the left- and right-hand loops to run down the center of Q4. This configuration is a technique referred to as body overlap in which the two KVL loops making up the right and left sides of a translinear circuit share a mutual body diode. Consequently, the translinear loops are not entirely independent of one another. However, KVL remains satisfied. Thus, performing KVL around the left- and right-hand circuits can still be performed independently because the two translinear loops are still present. Assuming the topology is composed of tightly matched transistors, 
+
+Consequently, ④ satisfies the vector sum. More importantly, however, is the technique used to arrive at this topology. Rather than purely through intuition of translinear circuits construction, we instead constructed semi-independent KVL statements stemming from our desired math operation while leveraging the translinear principle. A similar approach can be used universally. In the next section, we explore how this technique can be employed in constructing a first-order lowpass filter.
+
+## first order filters
+
+Current-mode filters are otherwise referred to as **log-domain filters** since their internal input/output transfer state for these filters are inherently logarithmic due to the use of translinear elements. In previous examples, we have exploited nonlinearity to provide large-signal linearity. We explore this concept further by introducing **dynamic translinear circuits**, which are a sub-family of circuits implementing time-derivative functions. Since the common translinear BJT element is controlled by the base-emitter junction voltage, a time-dependent collector current can be readily implemented through means of additional capacitance at the base, which restricts the rate-change of current on the output thereby implementing the time derivative of the first-order.
+
+Shown below is a standard RC low-pass filter. The time constant, τ, which dictates the cutoff frequency is derived purely from the interaction between the resistor and capacitor. The resistor limits current – thus restricting the rate at which the capacitor charges proportional to its own capacitance. In time-varying systems, such as oscillators, the filter block rate-limits the change of the signal output with respect to the input.
+
+<Image 
+alt={`11_rcfilter.png`} src={`/images/translinear-circuit/11_rcfilter.png`}
+width={379} height={227}
+/>
