@@ -46,33 +46,6 @@ export default function Home({ allPostsData, metarsData }) {
             </div>
           ))}
 
-          <SlimCard l
-            label={"Documentation"}
-            type={ 'website' }
-            path={"https://nextjs.org/docs"}
-            description={"Find in-depth information about Next.js features and API."}
-          />
-
-          <SlimCard l
-            label={"Learn"}
-            type={ 'website' }
-            path={"https://nextjs.org/learn"}
-            description={"Learn about Next.js in an interactive course with quizzes!"}
-          />
-
-          <SlimCard l
-            label={"Examples"}
-            type={ 'website' }
-            path={"https://github.com/vercel/next.js/tree/master/examples"}
-            description={"Discover and deploy boilerplate example Next.js projects."}
-          />
-
-          <SlimCard l
-            label={"Deploy"}
-            type={ 'website' }
-            path={"https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"}
-            description={"Instantly deploy your Next.js site to a public URL with Vercel."}
-          />
         </div>
       </main>
     </div>
@@ -93,17 +66,5 @@ export async function getStaticProps() {
     }
   }
 }
-
-// export async function getStaticProps() {
-//   const allPostsData = getSortedPostsData()
-//   const metarsData = await getMETARS()
-
-//   return {
-//     // Passed to page components as prop
-//     props: {
-//       allPostsData, metarsData
-//     }
-//   }
-// }
 
 Home.layout = Layout

@@ -43,11 +43,6 @@ export default function GalleryPage({ albums }) {
 export async function getServerSideProps() {
     const { db } = await connectToDatabase();
 
-    // Get distinct album names
-    // const albums = await db
-    //     .collection("gallery")
-    //     .distinct("album")
-
     // Get random document of distinct album value
     const albums = await db
         .collection("gallery")
@@ -71,7 +66,6 @@ export async function getServerSideProps() {
             }
         ]).toArray()
 
-    console.log(albums)
     return {
         props: {
             albums: JSON.parse(JSON.stringify(albums)),

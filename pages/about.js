@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Layout from '../components/templates/Layout'
 import Image from 'next/image'
 import { connectToDatabase } from '../lib/mongodb'
-import ExampleWithLightbox from '../components/ExampleWithLightbox'
 
 export default function About({ photo }) {
     return (
@@ -21,9 +20,8 @@ export default function About({ photo }) {
                     Who are we?!
                 </p>
 
-                {/* <ExampleWithLightbox photos={photo} /> */}
                 <Image src={photo[0].src} alt={photo[0].title} width={photo[0].width} height={photo[0].height} />
-                
+
                 <div className="mt-4 border-b border-b-black border-t border-t-black">
                     <h2 className="">
                         <div className="text-pink-500 font-bold inline">Title:</div>  {photo[0].title}
@@ -63,8 +61,6 @@ export async function getServerSideProps() {
         .sort({ date: 1 })
         .limit(1)
         .toArray();
-
-    console.log(gallery)
 
     return {
         props: {

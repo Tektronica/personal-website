@@ -6,8 +6,6 @@ import path from "path"
 
 import fs from "fs"
 import matter from "gray-matter"
-import dynamic from "next/dynamic"
-import CustomLink from "../../components/CustomLink"
 import { postFilePaths, POSTS_PATH } from "../../lib/mdxUtils"
 import Link from "next/link"
 import Image from "next/image"
@@ -29,7 +27,6 @@ import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
 import deepmerge from 'deepmerge'
 const schema = deepmerge(defaultSchema, { tagNames: ['math', 'mi'] })
 
-import rehypeComponents from "rehype-components"
 import { s } from 'hastscript'
 
 // Custom components/renderers to pass to MDX.
@@ -37,46 +34,12 @@ import { s } from 'hastscript'
 // to handle import statements. Instead, you must include components in scope
 // here.
 const components = {
-  // a: CustomLink,
-
-  // Head,
-  // h1: (props) =>
-  //   <h1
-  //     style={{ zIndex: "300", color: "red" }}
-  //     className={"text-5xl font-bold sticky top-0 bg-white pt-4 border-b-4 border-black text-left uppercase"}>
-  //     {props.children}
-  //   </h1>,
-
-  // h2: (props) =>
-  //   <h2
-  //     style={{ color: "black" }}
-  //     className={"text-xl font-bold pt-4 bg-white"}>
-  //     {props.children}
-  //   </h2>,
-
   // Image: dynamic(() => import("next/image")),
   img: (props) => <img className="mx-auto" {...props}></img>,
   Image: (props) => (
     // height and width are part of the props, so they get automatically passed here with {...props}
     <div className="flex flex-wrap justify-center"><Image {...props} layout="" loading="lazy" /></div>),
-
-  // code: props => <pre style={{color: 'tomato'}} {...props} />
 }
-
-// https://github.com/rehypejs/rehype-autolink-headings#optionscontent
-// const content = s(
-//   'svg',
-//   {
-//     xmlns: 'http://www.w3.org/2000/svg',
-//     width: 16,
-//     height: 16,
-//     fill: 'black',
-//     viewBox: '0 0 16 16'
-//   },
-//   s('path', {
-//     d: 'M7.775 3.275a.75.75 0 0 0 1.06 1.06l1.25-1.25a2 2 0 1 1 2.83 2.83l-2.5 2.5a2 2 0 0 1-2.83 0 .75.75 0 0 0-1.06 1.06 3.5 3.5 0 0 0 4.95 0l2.5-2.5a3.5 3.5 0 0 0-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 0 1 0-2.83l2.5-2.5a2 2 0 0 1 2.83 0 .75.75 0 0 0 1.06-1.06 3.5 3.5 0 0 0-4.95 0l-2.5 2.5a3.5 3.5 0 0 0 4.95 4.95l1.25-1.25a.75.75 0 0 0-1.06-1.06l-1.25 1.25a2 2 0 0 1-2.83 0z'
-//   })
-// )
 
 // https://github.com/remarkjs/remark/discussions/530#discussioncomment-63715
 function link() {
@@ -171,8 +134,7 @@ export const getStaticProps = async ({ params }) => {
             className: ["anchor"]
           },
           content: link
-        }]
-        // [rehypeComponents, {components: components}],
+        }],
         // rehypeSanitize, schema
       ],
     },
