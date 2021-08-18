@@ -11,12 +11,12 @@ export default function Blog({ allPostsData }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main className="flex flex-col items-left justify-top w-full flex-1 px-20 text-left">
-                <h1 className="text-6xl font-bold">
+            <main className="flex flex-col items-left justify-top w-full flex-1 text-left">
+                <h1 className="text-2xl md:text-6xl font-bold">
                     Blog.
                 </h1>
 
-                <p className="mt-3 text-2xl">
+                <p className="mt-3 text-lg md:text-2xl border-b border-black">
                     This is where we will talk about stuff!
                 </p>
                 <div className="flex flex-wrap gap-4 items-center  mt-6 sm:w-full">

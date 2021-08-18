@@ -12,26 +12,26 @@ export default function About({ photo }) {
             </Head>
 
             <main className="flex flex-col items-left justify-top w-full flex-1 text-left">
-                <h1 className="text-6xl font-bold">
+                <h1 className="text-2xl md:text-6xl font-bold">
                     About.
                 </h1>
 
-                <p className="mt-3 text-2xl">
+                <p className="mt-3 text-lg md:text-2xl border-b border-black">
                     Who are we?!
                 </p>
 
                 <Image src={photo[0].src} alt={photo[0].title} width={photo[0].width} height={photo[0].height} />
 
                 <div className="mt-4 border-b border-b-black border-t border-t-black">
-                    <h2 className="">
+                    <h2 className="text-sm sm:text-lg">
                         <div className="text-pink-500 font-bold inline">Title:</div>  {photo[0].title}
                     </h2>
-                    <h2 className="">
+                    <h2 className="text-sm sm:text-lg">
                         <div className="text-pink-500 font-bold inline">Description:</div> {photo[0].description}
                     </h2>
                 </div>
 
-                <div className="pb-2 mt-3 text-justify">
+                <div className="pb-2 mt-3 text-sm sm:text-lg text-justify">
                     <p>
                         We are Ryan and Jessie – we live to explore and have adventure, seeking both to appreciate a place for not only it’s natural beauty but to understand and appreciate its history and culture as well.  We’ve always known we want to travel, and are more than a little excited to finally be getting to the phase of our lives when we can do so.
                         <br /><br />

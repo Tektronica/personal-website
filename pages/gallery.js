@@ -13,11 +13,11 @@ export default function GalleryPage({ albums }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <main className="flex flex-col items-left justify-top w-full flex-1 px-20 text-left">
-                <h1 className="text-6xl font-bold">
+            <main className="flex flex-col items-left justify-top w-full flex-1 text-left">
+                <h1 className="text-2xl md:text-6xl font-bold">
                     Gallery.
                 </h1>
-                <div className='pt-2 flex flex-wrap gap-4'>
+                <div className='pt-2 flex flex-wrap gap-4 justify-center sm:justify-start'>
                     {albums.map(album => (
                         <div key={album._id}>
                             <PreviewCard

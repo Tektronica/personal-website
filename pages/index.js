@@ -17,15 +17,15 @@ export default function Home({ allPostsData, metarsData }) {
       <main className="flex flex-col items-left justify-top w-full flex-1 text-left">
         <MetarsStrip MetarsData={Object.values(metarsData)[0]} />
 
-        <h1 className="text-6xl font-bold">
+        <h1 className="text-2xl md:text-6xl font-bold">
           Welcome!
         </h1>
 
-        <p className="mt-3 text-2xl border-b border-black">
+        <p className="mt-3 text-lg md:text-2xl border-b border-black">
           To the Adventures of Ryan & Jessie
         </p>
         <div className="border-b border-black">
-          <div className="pb-2 mt-3 text-justify">
+          <div className="pb-2 mt-3 text-sm sm:text-lg text-justify">
             <p>
               At some point we’ll come up with a clever name for this website, but for now, fellow website-tester, consider yourself part of the “in” crowd who gets to see and appreciate a work-in-progress.  At the moment, we hope you will enjoy viewing our Iceland Elopement Gallery as well as an assortment of other photos documenting our Honeymoon adventure through Iceland.  We’re slowly adding more and more to this collection, including some writing about our adventures (journal style), and some handy maps to give context to where we trekked and where some of these photos were taken!
               <br /><br />

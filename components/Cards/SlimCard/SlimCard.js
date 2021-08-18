@@ -28,16 +28,6 @@ const SlimCard = (props) => {
 
     return (
         <>
-            {/* <a
-                href={ props.path }
-                className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-            >
-                <h3 className="text-2xl font-bold">{ props.label } &rarr;</h3>
-                <p className="mt-4 text-xl">
-                    { props.description }
-                </p>
-            </a> */}
-
             <Link href={props.path}>
                 <a
                     className="text-left w-full hover:text-blue-600 focus:text-blue-600"
@@ -53,8 +43,10 @@ const SlimCard = (props) => {
                         <div className="flex pl-2 border cursor-pointer border-black bg-white box-shadow-black">
                             <div className={`flex-none w-4 mr-2 ${bgColor[color]}`}></div>
                             <div className="flex-grow ">
-                                <h3 className="uppercase text-xl font-bold">{props.label} </h3>
-                                <p className="mt-1 text-lg">
+                                <h3 className="uppercase text-md md:text-2xl font-bold">
+                                    {props.label}
+                                </h3>
+                                <p className="mt-1 mt-3 text-sm md:text-lg">
                                     {props.description}
                                 </p>
                             </div>

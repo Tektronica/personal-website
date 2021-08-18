@@ -30,8 +30,8 @@ const PreviewCard = (props) => {
 
     return (
         <>
-            <div className="border border-black
-             transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover-trigger">
+        <Link href={props.url}>
+            <div className="border border-black transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover-trigger">
                 <ImageWithFallback
                     className="max-w-full h-auto md:h-48"
                     src={props.imgSrc}
@@ -50,10 +50,11 @@ const PreviewCard = (props) => {
                         <h3>{props.subtitle}</h3>
                     </div>
                     <div className="text-blue-600 hover:text-purple-500">
-                        <Link href={props.url}><a>View More...</a></Link>
+                        <a>View More...</a>
                     </div>
                 </div>
             </div>
+            </Link>
         </>
     );
 }
