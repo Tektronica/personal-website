@@ -5,7 +5,9 @@ function getColor(type) {
     if (type == 'tech') {
         return 'pink'
     } else if (type == 'travel') {
-        return 'green'
+        return 'blue'
+    } else if (type == 'tutorial') {
+        return 'yellow'
     } else {
         return 'yellow'
     }

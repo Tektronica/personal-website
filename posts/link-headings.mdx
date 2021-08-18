@@ -1,0 +1,196 @@
+---
+title: 'Linked Headings using rehype'
+date: '2021-08-17'
+description: 'rehype plugins are a powerful way to supercharge your blogs!'
+type: 'tutorial'
+---
+
+## Introduction
+This website's articles are generated from mdx files, which are a superset of markdown combining aspects of javascript. The package used is <code>next-mdx-remote</code>, which exposes accesibility to both remark and rehype plugins.
+
+## What is reHype?
+reHype is a powerful ecosystem of plugins for processing HTML.
+
+## Breaking things down
+
+### Imports
+
+```javascript
+// mdx parser
+import { MDXRemote, MDXProvider } from "next-mdx-remote"
+import { serialize } from "next-mdx-remote/serialize"
+
+// syntax highlighting
+import rehypePrism from "@mapbox/rehype-prism"
+// import rehypeHighlight from 'rehype-highlight'
+
+// added autolink headers. header id's needed. using rehypeslug for help
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeSlug from 'rehype-slug'
+
+// Sanitize html to prevent cross-site scripting (xss) attack
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
+import deepmerge from 'deepmerge'
+const schema = deepmerge(defaultSchema, { tagNames: ['math', 'mi'] })
+
+import { s } from 'hastscript'
+```
+
+The chainlink icon is created by this function:
+
+```javascript
+// /pages/posts/[id].js
+
+// https://github.com/remarkjs/remark/discussions/530#discussioncomment-63715
+function link() {
+  return s(
+    "svg.icon",
+    {
+      ariaHidden: "true",
+      viewBox: [0, 0, 24, 24],
+      focusable: false,
+      width: 18,
+      height: 18,
+      fill: "none",
+      className: "stroke-current text-gray-600"
+    },
+    s("path", {
+      "stroke-linecap": "round",
+      "stroke-width": 2,
+      "stroke-linejoin": "round",
+      d:
+        "M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+    })
+  );
+}
+```
+
+MDXRemote is the component being used to not only serve the generated content, but we can also implement custom <code>components</code> that we can reference straight from the mdx file.
+
+```javascript
+// /pages/posts/[id].js
+
+// Custom components/renderers to pass to MDX.
+// Since the MDX files aren"t loaded by webpack, they have no knowledge of how
+// to handle import statements. Instead, you must include components in scope
+// here.
+const components = {
+  // Image: dynamic(() => import("next/image")),
+  img: (props) => <img className="mx-auto" {...props}></img>,
+  Image: (props) => (
+    // height and width are part of the props, so they get automatically passed here with {...props}
+    <div className="flex flex-wrap justify-center"><Image {...props} layout="" loading="lazy" /></div>),
+}
+
+export default function Post({ source, frontMatter }) {
+
+  return (
+    <div className="flex flex-col min-h-screen py-2">
+      <Head>
+        <title>{frontMatter.title}</title>
+      </Head>
+      <article className="md:pl-36 md:pr-36 prose max-w-none text-justify">
+        <h1 className="">{frontMatter.title}</h1>
+        <div className="">
+          <Date dateString={frontMatter.date} />
+        </div>
+
+        <MDXRemote {...source} components={components} />
+
+        <div className="pt-4 text-lg"><Link href="/blog"><a> ◀ Back to articles</a></Link></div>
+      </article>
+    </div>
+  )
+}
+```
+
+Here in <code>getStaticProps</code> we pass in the read file into the mdx serializer, which is a pipline composed of several processing steps. At certain steps plugins such as <code>rehype</code> can be implemented.
+
+```javascript
+// /pages/posts/[id].js
+
+export const getStaticProps = async ({ params }) => {
+
+    const postFilePath = path.join(POSTS_PATH, `${params.id}.mdx`)
+    const source = fs.readFileSync(postFilePath)
+
+    const { content, data } = matter(source)
+
+    const mdxSource = await serialize(content, {
+        // Optionally pass remark/rehype plugins
+        mdxOptions: {
+            remarkPlugins: [],
+            rehypePlugins: [],
+        },
+        scope: data,
+        })
+
+    return {
+        props: {
+            source: mdxSource,
+            frontMatter: data,
+        },
+    }
+}
+```
+
+```javascript
+// /pages/posts/[id].js
+
+export const getStaticProps = async ({ params }) => {
+
+  const postFilePath = path.join(POSTS_PATH, `${params.id}.mdx`)
+  const source = fs.readFileSync(postFilePath)
+
+  const { content, data } = matter(source)
+
+  const mdxSource = await serialize(content, {
+    // Optionally pass remark/rehype plugins
+    mdxOptions: {
+      remarkPlugins: [],
+      rehypePlugins: [
+        // import prism css theme in _app.js
+        rehypePrism,
+        rehypeSlug,
+        [rehypeAutolinkHeadings, {
+          behavior: "append",
+          properties: {
+            ariaLabel: "Link to self",
+            className: ["anchor"]
+          },
+          content: link
+        }],
+        // rehypeSanitize, schema
+      ],
+    },
+    scope: data,
+  })
+
+  return {
+    props: {
+      source: mdxSource,
+      frontMatter: data,
+    },
+  }
+}
+```
+
+Finally, to have the chainlink hover responsive, we add to our <code>global.css</code> file (in this case <code>index.css</code>).
+
+```css
+/* /styles/index.css */
+
+/* style links added by rehype-autolink-headings, see svelte.config.js */
+/* https://github.com/janosh/svelte-toc/blob/8493df334a11661eddf03434372f6cd71ea313c1/site/static/global.css */
+:where(h2, h3, h4, h5, h6) a {
+  opacity: 0;
+  transition: 0.3s;
+  margin-left: 8pt;
+  background-size: contain;
+  margin-top: 4pt;
+
+}
+:where(h2, h3, h4, h5, h6):hover a {
+  opacity: 1;
+}
+```

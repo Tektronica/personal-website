@@ -1,0 +1,209 @@
+---
+title: 'Masonry Layout in NextJS '
+date: '2021-08-17'
+description: 'There are tons of implementations for pinboard-style image galleries!'
+type: 'tutorial'
+---
+
+## Introduction
+Masonry layouts, or pinboard galleries, were first widely popularized by Pinterest and has since then recieved quite the mixed-reviews in whether most web designers should do-away with them. Why? Because in the wrong situations, an even great masonry layout will still fall flat as being messy and simply just obfuscating your audience from enjoying content.
+
+**However** photo galleries used in photography portfolios, displaying vacation photos, or even just your miscellaneous art collection is supremely suited for masonry layout. This is because most photos you upload don't really follow a uniform aspect ratio - so, a fantastic way to celebrate your image's diversity is to perhaps beat your chest to masonic chants and follow along!
+
+```javascript
+import Head from 'next/head'
+import Layout from '../../components/templates/Layout'
+import { connectToDatabase } from '../../lib/mongodb'
+import ExampleWithLightbox from '../../components/ExampleWithLightbox';
+```
+
+I have documents on MongoDB containing individual images found on my Backblaze B2 file server. Each document describes all meta content I find important such as src, height, width, title, description, etc...
+
+The file this page resides contains brackets around the world <code>album</code>. This is a wildcard of sorts allowing me to utilize dynamic paths to my content in the form of a slug! Wait, a slug? Well this is just another word for wildcard (at least I like to think so) that uniquely identifies dynamic web addresses. You see, <code>[album]</code> is replaced in the url with whatever I want. In this case, when I open a page containing a gallery from a specific album, that album name replaces the slug! 
+
+>oh look! you can see an example of a slug in this article's URL! Here we have <code>domain.com/posts/masonry-gallery</code>. In reality, the page's file name is <code>/posts/[post].js</code>!
+
+```javascript
+// /pages/album/[album].js
+
+export default function Album({ photos }) {
+
+    return (
+        <div className="flex flex-col justify-center min-h-screen">
+            <Head>
+                <title>{photos[0].album}</title>
+            </Head>
+            
+            <h1 className="text-6xl font-bold uppercase">
+                {photos[0].album.replace('-', ' ')}
+            </h1>
+
+            <article>
+                {/* react-photo-gallery */}
+                <ExampleWithLightbox photos={photos} />
+            </article>
+        </div>
+    )
+}
+
+```
+
+```javascript
+// /components/ExampleWithLightbox.js
+
+import React, { useState, useCallback } from 'react';
+import Gallery from 'react-photo-gallery';
+import Carousel, { Modal, ModalGateway } from 'react-images';
+import Image from 'next/image';
+
+```
+
+So, this the file <code>ExampleWithLightbox.js</code> is a bit of a doozy to walkthrough line-by-line. However, it is fortunately much easier to discuss in abstract terms, which will hopefully reveal some of the boilerplate implementation happening. Let's start off with how <code>react-photo-gallery</code> works.
+
+At a top level, <code>react-photo-gallery</code> implements a line breaking algorithm adapted from Knuth and Plass to dynamically calculate the optimum image size and grid layout for your images. In Knuth and Plass original paper, [Breaking Paragraphs into Lines](http://www.eprg.org/G53DOC/pdfs/knuth-plass-breaking.pdf), the goal was to implement an efficient algorithm to justify text. Here we see much of the same technique being employed. However, instead of words, we have images. 
+
+<code>react-photo-gallery</code> works by feeding a JSON array object as an argument containing your images' meta data into the <code>Gallery</code> method. The method simply returns a complex <code>div</code> object containing all the newly resized and grid-oriented images back to your page.
+
+What makes this library even more fun is that you can override its image renderer! For instance, in nextjs, there is the <code>next/image</code> method allowing us to serve optimized images. Since <code>react-photo-gallery</code> doesn't come out of the box with an optimized image renderer capable of lazy loading, we replace it with <code>next/image</code> using a wrapper component <code>ImageWithFallback</code>! The wrapper component <code>ImageWithFallback</code> not only implements <code>next/image</code> but also a fallback placeholder photo if our file server bandwidth exceeds its daily cap.
+
+Now, <code>react-photo-gallery</code> comes with built-in lightbox functionality. This means when we click on a photo, it will expand to the front of the page and we can cycle through our gallery in fullscreen using its carousel feature! Normally the image-renderer can handle most of this backend with an onClick event on each photo. However, since we pass our resized images into our custom image wrapper, we must also handle the onClick event for the photo as well!
+
+```javascript
+// /components/ExampleWithLightbox.js
+
+// Responsive masonry gallery with lightbox 
+function ExampleWithLightbox({ photos }) {
+
+  const [currentImage, setCurrentImage] = useState(0);
+  const [viewerIsOpen, setViewerIsOpen] = useState(false);
+
+  const openLightbox = useCallback((event, { photo, index }) => {
+    setCurrentImage(index);
+    setViewerIsOpen(true);
+  }, []);
+
+  const closeLightbox = () => {
+    setCurrentImage(0);
+    setViewerIsOpen(false);
+  };
+
+  // https://github.com/neptunian/react-photo-gallery/issues/200#issuecomment-887995313
+  const customStyles = {
+    view: () => ({
+      // none of react-images styles are passed to <View />
+      position: 'relative',
+      '& > img': {
+        position: 'relative',
+        margin: '0 auto'
+      },
+    })
+  };
+
+  // optional; use a different image component than the default provided to display photo
+  // https://github.com/neptunian/react-photo-gallery/issues/178#issuecomment-845826413
+  const imageRenderer = useCallback(({ margin, index, photo, left, top, key }) => (
+    <div className="image-item" style={{ margin: '5px' }}>
+
+      <ImageWithFallback
+        // src={photo.src}
+        key={key}
+        margin={margin}
+        index={index}
+        photo={photo}
+
+        left={left}
+        top={top}
+        onClick={(e) => { openLightbox(e, { photo, index }) }}
+
+        placeholder="blur"
+        blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(700, 475))}`}
+
+        // https://source.unsplash.com/
+        fallbackSrc={`https://source.unsplash.com/${Math.round(photo.width)}x${Math.round(photo.height)}/?${photo.album}`}
+      />
+
+    </div>
+  ));
+
+  return (
+    <div>
+      <Gallery
+        photos={photos}
+        renderImage={imageRenderer}
+
+        direction={photos.length > 0 ? "column" : "row"}
+        columns={columns}
+        margin={5}
+      />
+
+      <ModalGateway>
+        {viewerIsOpen ? (
+          <Modal onClose={closeLightbox}>
+            <Carousel
+              currentIndex={currentImage}
+              styles={customStyles}
+              views={photos.map(x => ({
+                ...x,
+                srcset: x.srcSet,
+                caption: x.title,
+              }))}
+            />
+          </Modal>
+        ) : null}
+      </ModalGateway>
+    </div>
+  );
+}
+
+```
+
+```javascript
+// /components/ExampleWithLightbox.js
+
+// Custom Image rendering object
+// https://github.com/neptunian/react-photo-gallery/issues/171#issuecomment-631057102
+// https://github.com/neptunian/react-photo-gallery/issues/178#issuecomment-845826413
+function ImageWithFallback(props) {
+
+  const { fallbackSrc, ...photoObj } = props;
+  const { index, photo, margin, direction, top, left, onClick, ...rest } = { ...photoObj };
+  const [imgSrc, setImgSrc] = useState(photo.src);
+
+  const cont = {
+    backgroundColor: '#eee',
+    cursor: 'pointer',
+    overflow: 'hidden',
+    position: 'relative',
+  };
+
+  if (direction === 'column') {
+    cont.position = 'absolute';
+    cont.left = left;
+    cont.top = top;
+  }
+
+  return (
+    <div className={"image-item"}
+
+      role={"button"}
+      tabIndex={0}
+      style={{
+        width: photo.width,
+        height: photo.height,
+        margin,
+
+        // the important staff
+        position: "absolute",
+        left,
+        top,
+      }}
+      onClick={onClick}
+    >
+      <Image
+        {...photo}
+        onError={() => { setImgSrc(fallbackSrc) }}
+      />
+    </div>
+  );
+};
+```
