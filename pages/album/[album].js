@@ -12,7 +12,7 @@ export default function Album({ photos }) {
                 <title>{photos[0].album}</title>
             </Head>
             
-            <h1 className="text-6xl font-bold uppercase">
+            <h1 className="text-2xl md:text-6xl font-bold uppercase">
                 {/* Placeholder */}
                 {photos[0].album.replace('-', ' ')}
             </h1>
