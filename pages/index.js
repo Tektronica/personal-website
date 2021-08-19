@@ -24,6 +24,7 @@ export default function Home({ allPostsData, metarsData }) {
 
       <main className="flex flex-col items-left justify-top w-full flex-1 text-left">
         <MetarsStrip MetarsData={Object.values(metarsData)[0]} />
+        {/* TODO cover image */}
         <div className="">
           <Image className="" src='/images/index.jpg' width={5492} height={1800} objectFit='cover' />
         </div>
