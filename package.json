@@ -11,6 +11,7 @@
     "date-fns": "^2.23.0",
     "deepmerge": "^4.2.2",
     "framer-motion": "^4.1.17",
+    "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
     "hastscript": "^7.0.2",
     "mongodb": "^3.5.9",

@@ -43,10 +43,10 @@ const SlimCard = (props) => {
                         <div className="flex pl-2 border cursor-pointer border-black bg-white box-shadow-black">
                             <div className={`flex-none w-4 mr-2 ${bgColor[color]}`}></div>
                             <div className="flex-grow ">
-                                <h3 className="uppercase text-md md:text-2xl font-bold">
+                                <h3 className="uppercase text-md md:text-lg font-bold">
                                     {props.label}
                                 </h3>
-                                <p className="mt-1 mt-3 text-sm md:text-lg">
+                                <p className="mt-1 text-sm md:text-md">
                                     {props.description}
                                 </p>
                             </div>

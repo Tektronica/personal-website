@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Layout from '../components/templates/Layout'
 import Image from 'next/image'
-import { connectToDatabase } from '../lib/mongodb'
+import { connectToDatabase } from '../lib/mongodb-client'
+// import clientPromise from './mongodb-client'
 
 export default function About({ photo }) {
     return (
@@ -52,6 +53,19 @@ export default function About({ photo }) {
         </div>
     )
 }
+
+// // Handler
+// module.exports = async (req, res) => {
+//     // define dependencies and modules
+
+//     // Get the MongoClient by calling await on the promise.
+//     // Because it is a promise, it will only resolve once.
+//     const client = await clientPromise;
+
+//     // Use the connection to return the name of the connected database.
+//     // res.status(200).json({ dbName: client.db().databaseName });
+//     return client.db().databaseName;
+// }
 
 export async function getServerSideProps() {
     const { db } = await connectToDatabase();
