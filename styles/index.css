@@ -22,8 +22,11 @@
 
 /* index hero image */
 .container_image {
-  height: 500px; /*Set any dimensions you like*/
-  width: 900px;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* background-position: 50% 50%; */
 }
 
 /* style links added by rehype-autolink-headings, see svelte.config.js */

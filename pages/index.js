@@ -8,13 +8,6 @@ import Image from 'next/image'
 
 export default function Home({ allPostsData, metarsData }) {
 
-  const objectMap = (obj, fn) =>
-    Object.fromEntries(
-      Object.entries(obj).map(
-        ([k, v], i) => [k, fn(v, k, i)]
-      )
-    )
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <Head>

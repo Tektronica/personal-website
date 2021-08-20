@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Layout from '../../components/templates/Layout'
-import { connectToDatabase } from '../../lib/mongodb'
+import { connectToDatabase } from '../../lib/mongodb-client'
 import ExampleWithLightbox from '../../components/ExampleWithLightbox';
 
 export default function Album({ photos }) {
