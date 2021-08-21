@@ -20,15 +20,6 @@
     }
   }
 
-/* index hero image */
-.container_image {
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  /* background-position: 50% 50%; */
-}
-
 /* style links added by rehype-autolink-headings, see svelte.config.js */
 /* https://github.com/janosh/svelte-toc/blob/8493df334a11661eddf03434372f6cd71ea313c1/site/static/global.css */
 :where(h2, h3, h4, h5, h6) a {

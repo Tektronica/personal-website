@@ -18,9 +18,9 @@ export default function Home({ allPostsData, metarsData }) {
       <main className="flex flex-col items-left justify-top w-full flex-1 text-left">
         <MetarsStrip MetarsData={Object.values(metarsData)[0]} />
         {/* TODO cover image */}
-        <div className="">
-          <Image className="" src='/images/index.jpg' width={5492} height={1800} objectFit='cover' />
-        </div>
+        <div className="w-full overflow-hidden relative" style={{ height: '50vh'}}>
+          <Image className="" src='/images/index.jpg' width={5492} height={1800} layout="fill" objectFit={"cover"}/>
+          </div>
         <p className="mt-3 text-pink-600 font-bold text-lg md:text-2xl border-b border-black ">
           The Adventures of Ryan & Jessie
         </p>
