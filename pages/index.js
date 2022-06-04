@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import Layout from '../components/templates/Layout'
 import SlimCard from "../components/Cards/SlimCard/SlimCard"
-import { getMETARS } from '../lib/metars'
-import MetarsStrip from "../lib/metars"
+import { getMETARS } from './api/metars'
+import MetarsStrip from "./api/metars"
 import { getAllForEachLabeled } from '../lib/posts'
 import Image from 'next/image'
 
@@ -18,9 +18,9 @@ export default function Home({ allPostsData, metarsData }) {
       <main className="flex flex-col items-left justify-top w-full flex-1 text-left">
         <MetarsStrip MetarsData={Object.values(metarsData)[0]} />
         {/* TODO cover image */}
-        <div className="w-full overflow-hidden relative" style={{ height: '50vh'}}>
-          <Image className="" src='/images/index.jpg' width={5492} height={1800} layout="fill" objectFit={"cover"}/>
-          </div>
+        <div className="w-full overflow-hidden relative" style={{ height: '50vh' }}>
+          <Image className="" src='/images/index.jpg' width={5492} height={1800} layout="fill" objectFit={"cover"} />
+        </div>
         <p className="mt-3 text-pink-600 font-bold text-lg md:text-2xl border-b border-black ">
           The Adventures of Ryan & Jessie
         </p>
@@ -29,18 +29,12 @@ export default function Home({ allPostsData, metarsData }) {
 
             <div className="w-full grid grid cols-1 lg:grid-cols-2 gap-4 ">
               <div className="">
-                <p>
-                  At some point we’ll come up with a clever name for this website, but for now,
-                  fellow website-tester, consider yourself part of the “in” crowd who gets to see
-                  and appreciate a work-in-progress.  At the moment, we hope you will enjoy viewing
-                  our Iceland Elopement Gallery as well as an assortment of other photos documenting
-                  our Honeymoon adventure through Iceland.  We’re slowly adding more and more to this
-                  collection, including some writing about our adventures (journal style), and some
-                  handy maps to give context to where we trekked and where some of these photos were taken!
-                  <br /><br />
-                  Please bear with us as we continue adding things and learning about this whole website
-                  creation process.  If you have any suggestions, we’d love to hear them!
-                </p>
+                <body>
+                  <p>On July 4th, 2021, Jessie and Ryan embarked the hallowed voyage into marriage as Bryson’s; handfasted in Iceland.
+                    <br /><br />
+                    On a beautiful July day which brought morning mist and crystal blue afternoon skies, we were married in Iceland along the coastlines of Reykjavík. We marched across the Snæfellsnes peninsula, swept off our feet by the beauty of Kirkjufell mountain and our breath taken by mystical beauty of lands forged in fire by volcanic eruptions. These ancient lands were our guides transcending time itself as we took our first steps as one. We overcame foreign lands, culture, and language, yet found peace in the unique bond we shared in the company of others.
+                  </p>
+                </body>
               </div>
 
               <div className="">
@@ -82,7 +76,7 @@ export default function Home({ allPostsData, metarsData }) {
 // This function gets called at build time on server-side.
 // It won't be called on client-side, so you can even do
 // direct database queries. See the "Technical details" section.
-export async function getStaticProps() {
+export async function getServerSideProps() {
 
   const filterString = ['travel', 'tutorial']
   const allPostsData = getAllForEachLabeled(filterString)

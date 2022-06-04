@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Layout from '../components/templates/Layout'
-import { connectToDatabase } from '../lib/mongodb-client'
+import { connectToDatabase } from './api/mongodb-client'
 import PreviewCard from '../components/Cards/GalleryCard/PreviewCard'
 import Album from './album/[album]'
 

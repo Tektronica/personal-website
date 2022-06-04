@@ -58,6 +58,10 @@ const Navbar = () => {
             Home
           </a>
           <a className="text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-auto"
+            href="/highlights">
+            Highlights
+          </a>
+          <a className="text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-auto"
             href="/about">
             About
           </a>
