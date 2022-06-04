@@ -71,7 +71,9 @@ export default function Post({ source, frontMatter }) {
       <Head>
         <title>{frontMatter.title}</title>
       </Head>
-      <article className="md:pl-36 md:pr-36 prose md:prose-lg max-w-none text-justify">
+      
+      {/* md:w-[700px] */}
+      <article className="prose md:prose-lg max-w-none text-justify">
         <h1 className="">{frontMatter.title}</h1>
         <div className="">
           <Date dateString={frontMatter.date} />
