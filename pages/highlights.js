@@ -16,9 +16,9 @@ export default function Highlights() {
                 </h1>
 
                 <div className="pb-2 mt-3 text-sm sm:text-lg text-justify">
-                    <body>
-                        <p>Our journey was a craving for adventure, a taste for wonder, a thirst for exploration which captivated our hearts.  Iceland with all its ancient mysticism and awe, felt as home to our new name as Bryson and we ardently shed the layers which had so entirely compressed us down in the years of planning.  Our Iceland elopement was truly the trip of a lifetime, and we feel so lucky to have been able to experience this adventure, and to tie it into our wedding.  Although several months have gone by, both of us still fondly think back to last July and relish in one of the thousands of memories we now share as one.</p>
-                    </body>
+                    <p>
+                        Our journey was a craving for adventure, a taste for wonder, a thirst for exploration which captivated our hearts.  Iceland with all its ancient mysticism and awe, felt as home to our new name as Bryson and we ardently shed the layers which had so entirely compressed us down in the years of planning.  Our Iceland elopement was truly the trip of a lifetime, and we feel so lucky to have been able to experience this adventure, and to tie it into our wedding.  Although several months have gone by, both of us still fondly think back to last July and relish in one of the thousands of memories we now share as one.
+                    </p>
                 </div>
 
                 <div className='grid place-items-center'>

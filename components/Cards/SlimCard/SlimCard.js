@@ -41,6 +41,7 @@ const SlimCard = (props) => {
                         transition: { duration: .2 }
                     }}>
                         <div className="flex pl-2 border cursor-pointer border-black bg-white box-shadow-black">
+                        
                             <div className={`flex-none w-4 mr-2 ${bgColor[color]}`}></div>
                             <div className="flex-grow ">
                                 <h3 className="uppercase text-md md:text-lg font-bold">

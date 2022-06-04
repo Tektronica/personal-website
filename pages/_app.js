@@ -11,8 +11,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Layout>
       <Head>
-        <meta name="google-site-verification" content="vJTVQgr-m2CikpQgrZ9vP9Aw09qtCSaBe-eAIGHMmpk" />
-      </Head>
+        <meta name="google-site-verification" content="vJTVQgr-m2CikpQgrZ9vP9Aw09qtCSaBe-eAIGHMmpk" />      </Head>
       <Component {...pageProps} />
     </Layout>
 

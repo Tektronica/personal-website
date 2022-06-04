@@ -9,6 +9,7 @@ import Image from 'next/image'
 export default function Home({ allPostsData, metarsData }) {
 
   return (
+    <>
     <div className="flex flex-col items-center justify-center min-h-screen">
       <Head>
         <title>Home</title>
@@ -19,7 +20,8 @@ export default function Home({ allPostsData, metarsData }) {
         <MetarsStrip MetarsData={Object.values(metarsData)[0]} />
         {/* TODO cover image */}
         <div className="w-full overflow-hidden relative" style={{ height: '50vh' }}>
-          <Image className="" src='/images/index.jpg' width={5492} height={1800} layout="fill" objectFit={"cover"} />
+          {/* width={5492} height={1800}  */}
+          <Image className="" src='/images/index.jpg' layout="fill" objectFit={"cover"} />
         </div>
         <p className="mt-3 text-pink-600 font-bold text-lg md:text-2xl border-b border-black ">
           The Adventures of Ryan & Jessie
@@ -29,25 +31,23 @@ export default function Home({ allPostsData, metarsData }) {
 
             <div className="w-full grid grid cols-1 lg:grid-cols-2 gap-4 ">
               <div className="">
-                <body>
                   <p>On July 4th, 2021, Jessie and Ryan embarked the hallowed voyage into marriage as Bryson’s; handfasted in Iceland.
                     <br /><br />
                     On a beautiful July day which brought morning mist and crystal blue afternoon skies, we were married in Iceland along the coastlines of Reykjavík. We marched across the Snæfellsnes peninsula, swept off our feet by the beauty of Kirkjufell mountain and our breath taken by mystical beauty of lands forged in fire by volcanic eruptions. These ancient lands were our guides transcending time itself as we took our first steps as one. We overcame foreign lands, culture, and language, yet found peace in the unique bond we shared in the company of others.
                   </p>
-                </body>
               </div>
 
               <div className="">
                 {/* https://stackoverflow.com/a/14810722/3382269 */}
                 {Object.entries(allPostsData).map(([key, value]) => (
-                  <div>
+                  <div key={key}>
                     <h2 className="uppercase text-sm md:text-lg font-bold text-pink-600">
                       {key}
                     </h2>
                     <div className="">
                       {value.map(({ id, date, title, description, type }) => (
                         <div className="mb-4" key={id}>
-                          <SlimCard l
+                          <SlimCard
                             label={title}
                             type={type}
                             path={`/posts/${id}`}
@@ -61,8 +61,6 @@ export default function Home({ allPostsData, metarsData }) {
               </div>
             </div>
 
-
-
           </div>
         </div>
         <div className="flex flex-wrap gap-4 items-center  mt-6 sm:w-full">
@@ -70,6 +68,7 @@ export default function Home({ allPostsData, metarsData }) {
         </div>
       </main>
     </div>
+    </>
   )
 }
 

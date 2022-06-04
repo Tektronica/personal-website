@@ -11,6 +11,7 @@ module.exports = {
             'jr-portfolio.s3.us-west-002.backblazeb2.com',
             'source.unsplash.com',
             'latex.codecogs.com',
+            'maps.googleapis.com',
             // ...
         ]
     }
