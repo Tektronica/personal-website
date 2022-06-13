@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import Layout from '../components/templates/Layout'
 import Image from 'next/image'
-import { connectToDatabase } from './api/mongodb-client'
-// import clientPromise from './mongodb-client'
 
 export default function About({ photo }) {
     return (
@@ -21,14 +19,20 @@ export default function About({ photo }) {
                     Who are we?!
                 </p>
 
-                <Image src={photo[0].src} alt={photo[0].title} width={photo[0].width} height={photo[0].height} />
+                <Image src={`${process.env.BACKBLAZE_URL}iceland/vacation/Day02_Reykjavik_J_IMG_2643_dim_1920x1280_.jpg`} alt='The duo' width={1920} height={1280} />
 
                 <div className="mt-4 border-b border-b-black border-t border-t-black">
                     <h2 className="text-sm sm:text-lg">
-                        <div className="text-pink-500 font-bold inline">Title:</div>  {photo[0].title}
+                        <div className="text-pink-500 font-bold inline">
+                            Title:
+                        </div>
+                        The Duo
                     </h2>
                     <h2 className="text-sm sm:text-lg">
-                        <div className="text-pink-500 font-bold inline">Description:</div> {photo[0].description}
+                        <div className="text-pink-500 font-bold inline">
+                            Description:
+                        </div>
+                        Screwing around Hallgrímskirkja in Reykjavík
                     </h2>
                 </div>
 
@@ -48,35 +52,6 @@ export default function About({ photo }) {
             </main>
         </div>
     )
-}
-
-// // Handler
-// module.exports = async (req, res) => {
-//     // define dependencies and modules
-
-//     // Get the MongoClient by calling await on the promise.
-//     // Because it is a promise, it will only resolve once.
-//     const client = await clientPromise;
-
-//     // Use the connection to return the name of the connected database.
-//     // res.status(200).json({ dbName: client.db().databaseName });
-//     return client.db().databaseName;
-// }
-
-export async function getServerSideProps() {
-    const { db } = await connectToDatabase();
-    const gallery = await db
-        .collection("gallery")
-        .find({ album: 'iceland', title: 'The duo' })
-        .sort({ date: 1 })
-        .limit(1)
-        .toArray();
-
-    return {
-        props: {
-            photo: JSON.parse(JSON.stringify(gallery)),
-        },
-    };
 }
 
 About.layout = Layout

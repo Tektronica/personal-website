@@ -15,10 +15,10 @@
 /* Your own custom utilities */
 
 @layer utilities {
-    .box-shadow-black {
-      box-shadow: 0.125rem 0.125rem 0 0px #000;
-    }
+  .box-shadow-black {
+    box-shadow: 0.125rem 0.125rem 0 0px #000;
   }
+}
 
 /* style links added by rehype-autolink-headings, see svelte.config.js */
 /* https://github.com/janosh/svelte-toc/blob/8493df334a11661eddf03434372f6cd71ea313c1/site/static/global.css */
@@ -30,72 +30,87 @@
   margin-top: 4pt;
 
 }
+
 :where(h2, h3, h4, h5, h6):hover a {
   opacity: 1;
 }
 
+
 /* HAMBURGER MENU */
 .hamburger {
-cursor: pointer;
-width: 48px;
-height: 48px;
-transition: all 0.25s;
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  transition: all 0.25s;
 }
 
 .hamburger__top-bun,
 .hamburger__bottom-bun {
-content: '';
-position: absolute;
-width: 24px;
-height: 2px;
-background: #000;
-transform: rotate(0);
-transition: all 0.5s;
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: #000;
+  transform: rotate(0);
+  transition: all 0.5s;
 }
 
 .hamburger:hover [class*="-bun"] {
-background: #333;
+  background: #333;
 }
 
 .hamburger__top-bun {
-transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .hamburger__bottom-bun {
-transform: translateY(3px);
+  transform: translateY(3px);
 }
 
 .open {
-transform: rotate(90deg);
-transform: translateY(-1px);
+  transform: rotate(90deg);
+  transform: translateY(-1px);
 }
 
 .open .hamburger__top-bun {
-transform:
-  rotate(45deg)
-  translateY(0px);
+  transform:
+    rotate(45deg) translateY(0px);
 }
 
 .open .hamburger__bottom-bun {
-transform:
-  rotate(-45deg)
-  translateY(0px);
+  transform:
+    rotate(-45deg) translateY(0px);
 }
 
+
+/* for masonry layout components */
 .my-masonry-grid {
-  display: -webkit-box; /* Not needed if autoprefixing */
-  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: -webkit-box;
+  /* Not needed if autoprefixing */
+  display: -ms-flexbox;
+  /* Not needed if autoprefixing */
   display: flex;
-  margin-left: -10px; /* gutter size offset */
+  margin-left: -10px;
+  /* gutter size offset */
   width: auto;
 }
+
 .my-masonry-grid_column {
-  padding-left: 10px; /* gutter size */
+  padding-left: 10px;
+  /* gutter size */
   background-clip: padding-box;
 }
 
 /* Style your items */
-.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+.my-masonry-grid_column>div {
+  /* change div to reference your elements you put in <Masonry> */
   background: grey;
   margin-bottom: 10px;
+}
+
+
+/* style is for anchor tag gaps around images */
+a.gallery-thumbnail-link {
+  display: flex;
+  justify-content: center;
 }

@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import Layout from '../components/templates/Layout'
-import { connectToDatabase } from './api/mongodb-client'
-import PreviewCard from '../components/Cards/GalleryCard/PreviewCard'
-import Album from './album/[album]'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function GalleryPage({ albums }) {
 
@@ -14,63 +13,38 @@ export default function GalleryPage({ albums }) {
             </Head>
 
             <main className="flex flex-col items-left justify-top w-full flex-1 text-left">
-                <h1 className="text-2xl md:text-6xl font-bold">
+                <h1 className="text-2xl md:text-6xl font-bold border-b border-black ">
                     Gallery.
                 </h1>
-                <div className='pt-2 flex flex-wrap gap-4 justify-center sm:justify-start'>
-                    {albums.map(album => (
-                        <div key={album._id}>
-                            <PreviewCard
-                                imgSrc={album.src}
-                                title={album._id.replace('-', ' ')}
-                                subtitle={album.count + " images available"}
-                                body='Example body'
-                                url={`/album/${album._id}`}
-                                width={album.width}
-                                height={album.height}
-                            />
-                        </div>
-                    ))}
+
+                <div className='pt-4 flex flex-row justify-center sm:justify-start'>
+                    <Link href={`/album/vacation`}>
+                        <a>
+                            {/* opacity-0 group-hover:opacity-100 duration-300  */}
+                            <div className="transition duration-500 group ease-in-out transform hover:-translate-y-1 hover:scale-110 hover-trigger">
+                                <div className="-rotate-12 opacity-0 group-hover:opacity-100 duration-300 absolute left-0 mt-16 right-0 z-10 flex justify-center items-end">
+                                    <Image src={`${process.env.BACKBLAZE_URL}iceland/buttons/honeymoon_text_dim_522x140.png`} alt='Vacation' width={522} height={140} />
+                                </div>
+                                <Image src={`${process.env.BACKBLAZE_URL}iceland/buttons/VACATION_button.png`} alt='Vacation' width={616} height={1080} />
+
+                            </div>
+                        </a>
+                    </Link>
+                    <Link href={`/album/elopement`}>
+                        <a>
+                            <div className="transition duration-500 group ease-in-out transform hover:-translate-y-1 hover:scale-110 hover-trigger">
+                                <div className="-rotate-12 opacity-0 group-hover:opacity-100 duration-300 absolute left-0 mt-16 right-0 z-10 flex justify-center items-end">
+                                    <Image src={`${process.env.BACKBLAZE_URL}iceland/buttons/elopement_text_dim_585x169.png`} alt='Vacation' width={585} height={169} />
+                                </div>
+                                <Image src={`${process.env.BACKBLAZE_URL}iceland/buttons/ELOPEMENT_button.png`} alt='Elopement' width={606} height={1080} />
+                            </div>
+                        </a>
+                    </Link>
                 </div>
             </main>
         </div>
     )
 }
 
-// This function gets called at build time on server-side.
-// It won't be called on client-side, so you can even do
-// direct database queries. See the "Technical details" section.
-export async function getServerSideProps() {
-    const { db } = await connectToDatabase();
-
-    // Get random document of distinct album value
-    const albums = await db
-        .collection("gallery")
-        .aggregate([
-            // First Stage
-            /**
-             * _id: The id of the group.
-             * count: counts number of documents within each group
-             * src: finds first value for src field within each group
-             */
-            // https://stackoverflow.com/a/62950842
-            {
-                $group:
-                {
-                    _id: "$album",
-                    count: { $sum: 1 },
-                    src: { $first: "$src" },
-                    width: { $first: "$width" },
-                    height: { $first: "$height" },
-                }
-            }
-        ]).toArray()
-
-    return {
-        props: {
-            albums: JSON.parse(JSON.stringify(albums)),
-        },
-    };
-}
 
 GalleryPage.layout = Layout

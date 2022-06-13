@@ -30,15 +30,24 @@ const schema = deepmerge(defaultSchema, { tagNames: ['math', 'mi'] })
 import { s } from 'hastscript'
 
 // Custom components/renderers to pass to MDX.
-// Since the MDX files aren"t loaded by webpack, they have no knowledge of how
+// Since the MDX files aren't loaded by webpack, they have no knowledge of how
 // to handle import statements. Instead, you must include components in scope
 // here.
 const components = {
   // Image: dynamic(() => import("next/image")),
   img: (props) => <img className="mx-auto" {...props}></img>,
+
   Image: (props) => (
     // height and width are part of the props, so they get automatically passed here with {...props}
-    <div className="flex flex-wrap justify-center"><Image {...props} layout="" loading="lazy" /></div>),
+    <div className="flex flex-wrap justify-center">
+      <Image {...props} layout="" loading="lazy" />
+    </div>),
+
+  B2Image: (props) => (
+    // height and width are part of the props, so they get automatically passed here with {...props}
+    <div className="flex flex-wrap justify-center">
+      <Image {...props} src={process.env.BACKBLAZE_URL + props.filename} layout="" loading="lazy" />
+    </div>),
 }
 
 // https://github.com/remarkjs/remark/discussions/530#discussioncomment-63715
@@ -71,7 +80,7 @@ export default function Post({ source, frontMatter }) {
       <Head>
         <title>{frontMatter.title}</title>
       </Head>
-      
+
       {/* md:w-[700px] */}
       <article className="prose md:prose-lg max-w-none text-justify">
         <h1 className="">{frontMatter.title}</h1>
@@ -79,6 +88,7 @@ export default function Post({ source, frontMatter }) {
           <Date dateString={frontMatter.date} />
         </div>
 
+        {/* MDXRemote uses the components prop to decide which html elements to switch for components */}
         <MDXRemote {...source} components={components} />
 
         <div className="pt-4 text-lg"><Link href="/blog"><a> ◀ Back to articles</a></Link></div>

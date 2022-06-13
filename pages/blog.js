@@ -21,8 +21,8 @@ export default function Blog({ allPostsData }) {
                 </p>
                 <div className="">
                 {/* https://stackoverflow.com/a/14810722/3382269 */}
-                {Object.entries(allPostsData).map(([key, value]) => (
-                  <div>
+                {Object.entries(allPostsData).map(([key, value], idx) => (
+                  <div key={idx}>
                     <h2 className="uppercase text-sm md:text-lg font-bold text-pink-600">
                       {key}
                     </h2>
