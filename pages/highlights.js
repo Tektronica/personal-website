@@ -43,7 +43,7 @@ export default function Highlights() {
                             </Link>
                         </div>
                         <div className="pl-4 border-b hover:pb-2 hover:pt-2 hover:text-white hover:rounded-xl transition-all duration-200 hover:bg-gradient-to-tl hover:from-pink-500 hover:via-red-500 hover:to-yellow-400">
-                            <Link href="/posts/ceremony">
+                            <Link href="/posts/legally-married">
                                 Getting a marriage license abroad
                             </Link>
                         </div>
@@ -89,12 +89,17 @@ export default function Highlights() {
                     </div>
                 </div>
 
-
-
-                <div className='grid place-items-center'>
-                    <div>
-                        <iframe src="https://www.google.com/maps/d/embed?mid=1idyt4fC14-3r76cmcubZI567lDFYC4Ac&ehbc=2E312F" width="640" height="480"></iframe>
-                    </div>
+                {/* google maps iframe */}
+                <div className="google-maps flex flex-grow md:m-4 justify-center">
+                    <iframe
+                        className="google-maps"
+                        src="https://www.google.com/maps/d/embed?mid=1idyt4fC14-3r76cmcubZI567lDFYC4Ac&ehbc=2E312F"
+                        width="640"
+                        height="480"
+                        allowfullscreen=""
+                        loading="lazy"
+                    >
+                    </iframe>
                 </div>
             </main>
         </div>

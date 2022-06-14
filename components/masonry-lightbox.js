@@ -15,7 +15,7 @@ function ResponsiveMasonryLightbox({ photos }) {
   // image masonry responsive breakpoints
   // https://www.npmjs.com/package/react-masonry-css
   const breakpointColumnsObj = {
-    default: 4,
+    default: 3,
     1300: 3,
     768: 2,
     500: 1

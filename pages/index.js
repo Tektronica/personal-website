@@ -79,7 +79,8 @@ export default function Home({ allPostsData, metarsData }) {
 // direct database queries. See the "Technical details" section.
 export async function getServerSideProps() {
 
-  const filterString = ['travel', 'tutorial']
+  // const filterString = ['travel', 'tutorial']
+  const filterString = ['travel']
   const allPostsData = getAllForEachLabeled(filterString)
   const metarsData = await getMETARS()
 
