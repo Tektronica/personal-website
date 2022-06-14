@@ -96,7 +96,7 @@ export default function Highlights() {
                         src="https://www.google.com/maps/d/embed?mid=1idyt4fC14-3r76cmcubZI567lDFYC4Ac&ehbc=2E312F"
                         width="640"
                         height="480"
-                        allowfullscreen=""
+                        allowFullScreen=""
                         loading="lazy"
                     >
                     </iframe>

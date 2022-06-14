@@ -21,7 +21,7 @@ export default function GalleryPage({ albums }) {
                     <Link href={`/album/honeymoon`}>
                         <a>
                             {/* opacity-0 group-hover:opacity-100 duration-300  */}
-                            <div className="transition duration-500 group ease-in-out transform hover:-translate-y-1 hover:scale-110 hover-trigger">
+                            <div className="relative transition duration-500 group ease-in-out transform hover:-translate-y-1 hover:scale-110 hover-trigger hover:z-50">
                                 <div className="-rotate-12 opacity-0 group-hover:opacity-100 duration-300 absolute left-0 mt-16 right-0 z-10 flex justify-center items-end">
                                     <Image src={`${process.env.BACKBLAZE_URL}iceland/buttons/honeymoon_text_dim_522x140.png`} alt='Vacation' width={522} height={140} />
                                 </div>
@@ -32,7 +32,7 @@ export default function GalleryPage({ albums }) {
                     </Link>
                     <Link href={`/album/elopement`}>
                         <a>
-                            <div className="transition duration-500 group ease-in-out transform hover:-translate-y-1 hover:scale-110 hover-trigger">
+                            <div className="relative transition duration-500 group ease-in-out transform hover:-translate-y-1 hover:scale-110 hover-trigger hover:z-50">
                                 <div className="-rotate-12 opacity-0 group-hover:opacity-100 duration-300 absolute left-0 mt-16 right-0 z-10 flex justify-center items-end">
                                     <Image src={`${process.env.BACKBLAZE_URL}iceland/buttons/elopement_text_dim_585x169.png`} alt='Vacation' width={585} height={169} />
                                 </div>

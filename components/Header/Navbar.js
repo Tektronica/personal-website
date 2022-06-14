@@ -18,17 +18,21 @@ const Navbar = () => {
       <nav id="site-menu" className="flex flex-col sm:flex-row w-full justify-between sm:px-6 py-1 bg-white">
 
         <div className="w-full sm:w-auto self-start sm:self-center flex flex-row sm:flex-none flex-no-wrap justify-between items-center">
-          
+
           <div className="flex">
-            <a href="/"
-              className="no-underline py-1">
-              <h1 className="font-bold text-lg tracking-widest">
-                <img
-                  src="/tektronica.svg"
-                  alt="Tektronica Logo"
-                  className="h-12 sm:h-16" />
-              </h1>
-            </a>
+            <Link
+              href="/">
+              <a
+                className="no-underline py-1">
+                <h1 className="font-bold text-lg tracking-widest">
+                  <img
+                    src="/tektronica.svg"
+                    alt="Tektronica Logo"
+                    className="h-12 sm:h-16" />
+                </h1>
+              </a>
+            </Link>
+
             <div className="pl-6 flex items-center justify-center cursor-pointer">
               <Link href="https://github.com/Tektronica">
                 <svg
@@ -54,26 +58,36 @@ const Navbar = () => {
         </div>
 
         <div id="menu" className="w-full sm:w-auto self-end sm:self-center gap-x-6 sm:flex flex-col sm:flex-row hidden">
-          <a className="text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-auto"
+          <Link
             href="/">
-            Home
-          </a>
-          <a className="text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-auto"
+            <a className="text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-aut">
+              Home
+            </a>
+          </Link>
+          <Link
             href="/highlights">
-            Highlights
-          </a>
-          <a className="text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-auto"
+            <a className="text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-aut">
+              Highlights
+            </a>
+          </Link>
+          <Link
             href="/about">
-            About
-          </a>
-          <a className="text-dark font-bold hover:bg-pink-200  text-lg w-full no-underline sm:w-auto"
+            <a className="text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-aut">
+              About
+            </a>
+          </Link>
+          <Link
             href="/gallery">
-            Gallery
-          </a>
-          <a className="text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-auto"
+            <a className="text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-aut">
+              Gallery
+            </a>
+          </Link>
+          <Link
             href="/blog">
-            Blog
-          </a>
+            <a className="text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-aut">
+              Blog
+            </a>
+          </Link>
         </div>
 
       </nav>

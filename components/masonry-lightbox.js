@@ -58,7 +58,7 @@ function ResponsiveMasonryLightbox({ photos }) {
   const items = photos.map((photo, idx) => {
     return (
       <div
-        className='flex flex-col transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 hover-trigger'
+        className='relative hover:z-50 flex flex-col transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110 hover-trigger'
         key={idx}
       >
         <a

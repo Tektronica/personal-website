@@ -19,6 +19,7 @@ module.exports = {
             'f002.backblazeb2.com',
             'photos.app.goo.gl',
             'lh5.googleusercontent.com',
+            'i.kym-cdn.com',
             // ...
         ]
     }
