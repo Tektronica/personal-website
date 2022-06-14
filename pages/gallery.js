@@ -18,7 +18,7 @@ export default function GalleryPage({ albums }) {
                 </h1>
 
                 <div className='pt-4 flex flex-row justify-center sm:justify-start'>
-                    <Link href={`/album/vacation`}>
+                    <Link href={`/album/honeymoon`}>
                         <a>
                             {/* opacity-0 group-hover:opacity-100 duration-300  */}
                             <div className="transition duration-500 group ease-in-out transform hover:-translate-y-1 hover:scale-110 hover-trigger">

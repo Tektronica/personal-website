@@ -18,6 +18,7 @@ module.exports = {
             'maps.googleapis.com',
             'f002.backblazeb2.com',
             'photos.app.goo.gl',
+            'lh5.googleusercontent.com',
             // ...
         ]
     }

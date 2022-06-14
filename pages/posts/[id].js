@@ -48,6 +48,18 @@ const components = {
     <div className="flex flex-wrap justify-center">
       <Image {...props} src={process.env.BACKBLAZE_URL + props.filename} layout="" loading="lazy" />
     </div>),
+
+  MDXLink: (props) => (
+    // height and width are part of the props, so they get automatically passed here with {...props}
+      <a href={props.href}
+        className=""
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span className="font-bold text-pink-500 hover:text-blue-500" >
+          {props.title}
+        </span>
+      </a>),
 }
 
 // https://github.com/remarkjs/remark/discussions/530#discussioncomment-63715

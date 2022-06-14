@@ -7,7 +7,7 @@ export default function Album({ gallery }) {
     var galleryLink = null
     const album = gallery.album
 
-    if (album == 'vacation') {
+    if (album == 'honeymoon') {
         galleryLink = "https://photos.app.goo.gl/ALmr5BYHsLZ9i98x9"
     } else {
         galleryLink = 'https://photos.app.goo.gl/fqzXyJA86RCNAw278'
@@ -52,10 +52,10 @@ export default function Album({ gallery }) {
     )
 }
 
-  // args:
-  // - b2 client
-  // - album name
-  async function getImages(args) {
+// args:
+// - b2 client
+// - album name
+async function getImages(args) {
     const B2client = args.client
 
     // Lists the names of all files in a bucket, starting at a given name.
@@ -68,24 +68,36 @@ export default function Album({ gallery }) {
     const re = /[^_]*\dx\d*[^_\.|^_]/gi;
 
     files.forEach((file, idx) => {
-      if (file.contentType != 'text/plain') {
-        // prepare object but exclude .bzEmpty file
-        const fileName = file.fileName
-        const dim = fileName.match(re)[0].split('x');
-        const image = { 'src': B2client.b2Path + file.fileName, 'width': dim[0], 'height': dim[1], alt: '', index: idx}
+        if (file.contentType != 'text/plain') {
+            // prepare object but exclude .bzEmpty file
+            const fileName = file.fileName
+            const dim = fileName.match(re)[0].split('x');
+            const image = { 'src': B2client.b2Path + file.fileName, 'width': dim[0], 'height': dim[1], alt: '', index: idx }
 
-        // push to array of objects
-        images.push(image)
-      }
+            // push to array of objects
+            images.push(image)
+        }
     });
 
     return images
-  }
+}
+
+export async function getStaticPaths() {
+    const paths = [
+        { params: { album: 'honeymoon' } },
+        { params: { album: 'elopement' } },
+    ]
+
+    return {
+        paths,
+        fallback: false,
+    }
+}
 
 // This function gets called at build time on server-side.
 // It won't be called on client-side, so you can even do
 // direct database queries. See the "Technical details" section.
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
     // const res = await fetch("https://jsonplaceholder.typicode.com/photos");
     // const gallery = await res.json();
     // return { props: { photos: gallery }, };
