@@ -19,7 +19,7 @@ export default function About({ photo }) {
                     Who are we?!
                 </p>
 
-                <Image src={`${process.env.BACKBLAZE_URL}iceland/vacation/Day02_Reykjavik_J_IMG_2643_dim_1920x1280_.jpg`} alt='The duo' width={1920} height={1280} />
+                <Image src={`${process.env.BACKBLAZE_URL}iceland/honeymoon/Day02_Reykjavik_J_IMG_2643_dim_1920x1280_.jpg`} alt='The duo' width={1920} height={1280} />
 
                 <div className="mt-4 border-b border-b-black border-t border-t-black">
                     <h2 className="text-sm sm:text-lg">
