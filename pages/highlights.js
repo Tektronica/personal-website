@@ -38,7 +38,7 @@ export default function Highlights() {
                             </Link>
                         </div>
                         <div className="pl-4 border-b hover:pb-2 hover:pt-2 hover:text-white hover:rounded-xl transition-all duration-200 hover:bg-gradient-to-tl hover:from-pink-500 hover:via-red-500 hover:to-yellow-400">
-                            <Link href="/posts/ceremony">
+                            <Link href="/posts/wedding-dress">
                                 Designing a wedding dress
                             </Link>
                         </div>

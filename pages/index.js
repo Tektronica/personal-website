@@ -8,6 +8,32 @@ import Image from 'next/image'
 
 export default function Home({ allPostsData, metarsData }) {
 
+  // https://stackoverflow.com/a/14810722/3382269
+  // https://stackoverflow.com/a/34883368/3382269
+  const numPostsDispalyed = 4;
+  var postItems =
+    <div>
+      {Object.entries(allPostsData).map(([key, value]) => (
+        <div key={key}>
+          <h2 className="uppercase text-sm md:text-lg font-bold text-pink-600">
+            {key}
+          </h2>
+          <div className="">
+            {value.slice(0, numPostsDispalyed).map(({ id, date, title, description, type }) => (
+              <div className="mb-4" key={id}>
+                <SlimCard
+                  label={title}
+                  type={type}
+                  path={`/posts/${id}`}
+                  description={description}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen">
@@ -38,29 +64,7 @@ export default function Home({ allPostsData, metarsData }) {
                     Our morning rose from mist to crystal blue afternoon skies, with us married in Iceland along the coastlines of Reykjavík. We marched across the Snæfellsnes peninsula, swept off our feet by the beauty of Kirkjufell mountain and our breath taken by mystical beauty of lands forged in fire by volcanic eruptions. These ancient lands were our guides transcending time itself as we took our first steps as one. We overcame foreign lands, culture, and language, yet found peace in the unique bond we shared in the company of others.
                   </p>
                 </div>
-
-                <div className="">
-                  {/* https://stackoverflow.com/a/14810722/3382269 */}
-                  {Object.entries(allPostsData).map(([key, value]) => (
-                    <div key={key}>
-                      <h2 className="uppercase text-sm md:text-lg font-bold text-pink-600">
-                        {key}
-                      </h2>
-                      <div className="">
-                        {value.map(({ id, date, title, description, type }) => (
-                          <div className="mb-4" key={id}>
-                            <SlimCard
-                              label={title}
-                              type={type}
-                              path={`/posts/${id}`}
-                              description={description}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                {postItems}
               </div>
 
             </div>
