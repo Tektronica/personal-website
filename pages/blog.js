@@ -50,7 +50,8 @@ export default function Blog({ allPostsData }) {
 // It won't be called on client-side, so you can even do
 // direct database queries. See the "Technical details" section.
 export async function getStaticProps() {
-    const filterString = ['travel', 'tutorial', 'tech']
+    // const filterString = ['travel', 'tutorial', 'tech']
+    const filterString = ['travel']
     const allPostsData = getAllForEachLabeled(filterString)
 
     return {
