@@ -116,4 +116,10 @@ export async function getStaticProps({ params }) {
     };
 }
 
-Album.layout = Layout
+Album.getLayout = function getLayout(page) {
+    return (
+        <Layout>
+            {page}
+        </Layout>
+    )
+}

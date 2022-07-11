@@ -6,16 +6,10 @@ import App from 'next/app'
 // import Layout from '../components/templates/Layout'
 // https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
 
-class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props
-    const Layout = Component.layout || (children => <>{children}</>)
-    return (
-      <Layout>
-        <Component {...pageProps}></Component>
-      </Layout>
-    )
-  }
-}
 
-export default MyApp
+export default function MyApp({ Component, pageProps }) {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout || ((page) => page)
+
+  return getLayout(<Component {...pageProps} />)
+}

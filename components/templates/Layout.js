@@ -34,16 +34,16 @@ export default function Layout({ children }) {
 
             {/* this div handles the background image */}
             {/* <div className="border-8 border-black bg-no-repeat bg-left-bottom bg-fixed" style={styling}> */}
-            <div className="relative border-8 border-black z-50">
+            <div className="relative md:border-8 border-black z-50">
 
                 {/* this div ensures the main content div is centered */}
-                <div className="relative z-50 flex flex-grow md:m-4 justify-center">
+                <div className="min-h-screen z-50 flex flex-grow md:m-4 justify-center">
 
                     {/* drop shadow and other characteristics of the main content div */}
-                    <div className="max-w-[1200px] w-full p-4 bg-white rounded-md shadow-xl">
+                    <div className="max-w-[1200px] flex flex-col md:p-4 bg-white rounded-md shadow-xl">
 
                         <Navbar />
-                        <div className="sm:px-6 sm:px-6 mb-6">
+                        <div className="mb-6">
                             {children}
                         </div>
                         <Footer />

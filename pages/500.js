@@ -20,4 +20,10 @@ export default function FiveOhOh() {
     )
 }
 
-FiveOhOh.layout = Layout
+FiveOhOh.getLayout = function getLayout(page) {
+    return (
+        <Layout>
+            {page}
+        </Layout>
+    )
+}

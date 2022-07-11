@@ -20,4 +20,10 @@ export default function FourOhFour() {
     )
 }
 
-FourOhFour.layout = Layout
+FourOhFour.getLayout = function getLayout(page) {
+    return (
+        <Layout>
+            {page}
+        </Layout>
+    )
+}

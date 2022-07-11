@@ -183,5 +183,12 @@ export const getStaticProps = async ({ params }) => {
   }
 }
 
-Post.layout = Layout
+Post.getLayout = function getLayout(page) {
+  return (
+      <Layout>
+          {page}
+      </Layout>
+  )
+}
+
 

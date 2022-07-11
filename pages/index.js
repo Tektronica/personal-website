@@ -43,34 +43,50 @@ export default function Home({ allPostsData, metarsData }) {
         </Head>
 
         <main className="flex flex-col items-left justify-top w-full flex-1 text-left">
-          <MetarsStrip MetarsData={Object.values(metarsData)[0]} />
-          {/* TODO cover image */}
-          <div className="w-full overflow-hidden relative" style={{ height: '50vh' }}>
-            {/* width={5492} height={1800}  */}
-            <Image className="" src='/images/index.jpg' layout="fill" objectFit={"cover"} />
-          </div>
-          <p className="mt-3 text-pink-600 font-bold text-lg md:text-2xl border-b border-black ">
-            The Adventures of Ryan & Jessie
-          </p>
-          <div className="border-b border-black">
-            <div className="pb-2 mt-3 text-sm sm:text-lg text-justify">
 
-              <div className="w-full grid grid cols-1 lg:grid-cols-2 gap-4 ">
-                <div className="">
-                  <p className="first-letter:text-7xl first-letter:font-bold first-letter:text-slate-900
-                                first-letter:mr-3 first-letter:float-left">
-                    On July 4th, 2021, Jessie and Ryan embarked the hallowed voyage into marriage as Bryson’s; handfasted in Iceland.
-                    <br /><br />
-                    Our morning rose from mist to crystal blue afternoon skies, with us married in Iceland along the coastlines of Reykjavík. We marched across the Snæfellsnes peninsula, swept off our feet by the beauty of Kirkjufell mountain and our breath taken by mystical beauty of lands forged in fire by volcanic eruptions. These ancient lands were our guides transcending time itself as we took our first steps as one. We overcame foreign lands, culture, and language, yet found peace in the unique bond we shared in the company of others.
-                  </p>
-                </div>
-                {postItems}
-              </div>
-
+          <div className=''>
+            <div className='hidden md:flex'>
+              <MetarsStrip MetarsData={Object.values(metarsData)[0]} />
+            </div>
+            {/* cover image */}
+            <div className="w-full overflow-hidden relative" style={{ height: '50vh' }}>
+              {/* width={5492} height={1800}  */}
+              <Image
+                className=""
+                src='/images/index.jpg'
+                layout="fill"
+                objectFit={"cover"}
+                quality='100'
+                priority='true'
+              />
             </div>
           </div>
-          <div className="flex flex-wrap gap-4 items-center  mt-6 sm:w-full">
 
+          <div className='px-2 md:px-0'>
+            <p className="mt-3 text-pink-600 font-bold text-lg md:text-2xl border-b border-black ">
+              The Adventures of Ryan & Jessie
+            </p>
+
+            <div className="border-b border-black">
+              <div className="pb-2 mt-3 text-sm sm:text-lg text-justify">
+
+                <div className="w-full grid grid cols-1 lg:grid-cols-2 gap-4 ">
+                  <div className="">
+                    <p className="first-letter:text-5xl first-letter:font-bold first-letter:text-slate-900
+                                  first-letter:mr-2 first-letter:float-left">
+                      On July 4th, 2021, Jessie and Ryan embarked the hallowed voyage into marriage as Bryson's; handfasted in Iceland.
+                    </p>
+                    <p className='pt-2'>
+                      Our morning rose from mist to crystal blue afternoon skies, with us married in Iceland along the coastlines of Reykjavík. We marched across the Snæfellsnes peninsula, swept off our feet by the beauty of Kirkjufell mountain and our breath taken by mystical beauty of lands forged in fire by volcanic eruptions. These ancient lands were our guides transcending time itself as we took our first steps as one. We overcame foreign lands, culture, and language, yet found peace in the unique bond we shared in the company of others.
+                    </p>
+                  </div>
+                  {postItems}
+                </div>
+
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-4 items-center  mt-6 sm:w-full">
+            </div>
           </div>
         </main>
       </div>
@@ -101,4 +117,10 @@ export async function getServerSideProps() {
   }
 }
 
-Home.layout = Layout
+Home.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
+}
