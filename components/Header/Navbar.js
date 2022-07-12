@@ -16,9 +16,9 @@ const Navbar = () => {
   return (
     <>
       <nav id="site-menu"
-        className="flex flex-col  bg-white">
-        <div className='flex flex-col w-full md:flex-row md:justify-between border-b-4 border-slate-500 md:border-none'>
-          <div className="flex flex-row justify-between px-4 md:px-0  items-center w-full md:w-auto md:self-center md:flex-none self-start">
+        className="flex flex-col bg-white sticky top-0 z-50">
+        <div className='flex flex-col w-full md:flex-row md:justify-between shadow-md md:shadow-none'>
+          <div className="flex flex-row justify-between px-4 md:px-0 items-center w-full md:w-auto md:self-center md:flex-none self-start">
             {/* LOGO */}
             <div className='flex flex-row'>
               <Link
@@ -68,19 +68,11 @@ const Navbar = () => {
               <span className="hamburger__top-bun"></span><span className="hamburger__bottom-bun"></span>
             </button>
           </div>
-          {/* <div id="menu" className="hidden md:self-center gap-x-6 md:flex flex-col lg:flex-row w-full border-t border-b md:border-none md:w-auto self-end"> */}
-
           <div id="menu" className="hidden md:flex flex-col md:flex-row md:self-center gap-x-6  lg:flex-row w-full border-t border-b md:border-none md:w-auto self-end">
             <Link
               href="/">
               <a className="text-right pr-4 md:p-0 text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-aut">
                 Home
-              </a>
-            </Link>
-            <Link
-              href="/highlights">
-              <a className="text-right pr-4 md:p-0 text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-aut">
-                Highlights
               </a>
             </Link>
             <Link
@@ -93,6 +85,12 @@ const Navbar = () => {
               href="/gallery">
               <a className="text-right pr-4 md:p-0 text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-aut">
                 Gallery
+              </a>
+            </Link>
+            <Link
+              href="/highlights">
+              <a className="text-right pr-4 md:p-0 text-dark font-bold hover:bg-pink-200 text-lg w-full no-underline sm:w-aut">
+                Highlights
               </a>
             </Link>
             <Link

@@ -70,6 +70,10 @@ const components = {
         {props.title}
       </span>
     </a>),
+
+  h2: (props) => (
+    <h2 className='text-left' {...props}></h2>
+  )
 }
 
 // https://github.com/remarkjs/remark/discussions/530#discussioncomment-63715
@@ -98,7 +102,7 @@ function link() {
 export default function Post({ source, frontMatter }) {
 
   return (
-    <div className="flex flex-col min-h-screen py-2">
+    <div className="flex flex-col min-h-screen py-2 px-2 md:px-0">
       <Head>
         <title>{frontMatter.title}</title>
       </Head>
@@ -185,9 +189,9 @@ export const getStaticProps = async ({ params }) => {
 
 Post.getLayout = function getLayout(page) {
   return (
-      <Layout>
-          {page}
-      </Layout>
+    <Layout>
+      {page}
+    </Layout>
   )
 }
 

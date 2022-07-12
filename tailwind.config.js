@@ -39,7 +39,8 @@ module.exports = {
             h1: {
               color: theme('colors.pink.500'),
               background: 'white',
-              position: 'sticky',
+              // position: 'sticky', // makes mdx headers sticky
+              position: 'static',
               top: '0',
               borderBottom: 'solid black',
               paddingTop: '8px',
@@ -86,7 +87,8 @@ module.exports = {
             h1: {
               color: theme('colors.pink.500'),
               background: 'white',
-              position: 'sticky',
+              // position: 'sticky', // makes mdx headers sticky
+              position: 'static',
               top: '0',
               borderBottom: 'solid black',
               paddingTop: '8px',
