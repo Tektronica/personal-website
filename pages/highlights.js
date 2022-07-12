@@ -4,11 +4,10 @@ import Link from 'next/link'
 
 export default function Highlights() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-            <Head>
-                <title>Highlights</title>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
+        <div className="flex flex-col items-center justify-center min-h-screen py-2">            <Head>
+            <title>Highlights</title>
+            <link rel="icon" href="/favicon.ico" />
+        </Head>
 
             <main className="flex flex-col items-left justify-top w-full flex-1 text-left">
                 <h1 className="text-2xl md:text-6xl font-bold border-b mb-4">
@@ -90,16 +89,19 @@ export default function Highlights() {
                     </div>
 
                     {/* google maps iframe */}
-                    <div className="google-maps flex flex-grow md:m-4 justify-center">
+                    <div className="relative flex md:m-4 justify-center ">
                         <iframe
-                            className="google-maps"
+                            className='w-full h-[480px]'
                             src="https://www.google.com/maps/d/embed?mid=1idyt4fC14-3r76cmcubZI567lDFYC4Ac&ehbc=2E312F"
                             width="640"
                             height="480"
-                            allowFullScreen=""
+                            style={{ border: 0 }}
+                            frameborder="0"
+                            allowfullscreen=""
                             loading="lazy"
                         >
                         </iframe>
+
                     </div>
                 </div>
             </main>
